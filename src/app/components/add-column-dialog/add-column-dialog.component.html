@@ -1,0 +1,64 @@
+<!-- <dialog> -->
+<div class="dialogContainer">
+  <header>
+    <h2>Add New Column</h2>
+    <span class="material-symbols-outlined closeIcon" (click)="closeModal()">
+      close
+    </span>
+  </header>
+
+  <form [formGroup]="newColumnForm">
+    <div class="labelInputContainer">
+      <label for="colNameInput">Column Name</label>
+      <input
+        type="text"
+        id="colNameInput"
+        name="colNameInput"
+        [formControl]="newColumnForm.controls.columnName"
+      />
+
+      @if(columnIsInvalid) {
+      <p>Error: Enter a valid name.</p>
+      }
+    </div>
+
+    <div class="formTasksSection">
+      @if(tasks.length > 0) {
+      <p>Tasks</p>
+      }
+
+      <div class="colFormTasks" formArrayName="tasks">
+        @for(task of tasks.controls; track $index) {
+        <div class="taskInputPriorityContainer" [formGroupName]="$index">
+          <input type="text" formControlName="taskname" />
+          <select
+            name="prioritySelect"
+            id="prioritySelect"
+            formControlName="priority"
+          >
+            <option value="high">High</option>
+            <option value="moderate">Moderate</option>
+            <option value="low">Low</option>
+          </select>
+
+          <button class="removeTaskBtn" (click)="deleteTask($index)">
+            <span class="material-symbols-outlined"> remove </span>
+          </button>
+        </div>
+
+        }
+      </div>
+
+      <button class="addTaskBtn" (click)="addTaskToFormArray()">
+        <span class="material-symbols-outlined"> add_circle </span>
+        Add Task
+      </button>
+    </div>
+
+    <button class="mainBtn" (click)="addColumnSubmit()">Submit</button>
+  </form>
+</div>
+
+<!-- </dialog> -->
+
+<!-- <p>form works</p> -->

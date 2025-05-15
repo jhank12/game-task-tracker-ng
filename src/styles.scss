@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+
+    // colors
+    --bg-main: #191919;
+    --bg-secondary: #1F1F1F;
+    --bg-secondary-hover: #292929;
+    --border: #393939;
+
+    --border-full: 1px solid var(--border);
+
+    --bg-radius: 10px;
+
+    --font-main: #dedede;
+    --font-main-hover: #e8e8e8;
+
+    --font-secondary: #c9c9c9;
+    --font-gray: #949494;
+    --font-gray-hover: #a7a7a7;
+    --font-red: #FF4D4D;
+    --font-green: #64EC42;
+
+
+    --border-radius: 15px;
+    --scale-hover: 1.01;
+}
+
+html, body { 
+    height: 100%; 
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--font-main);
+    font-family: "Helvetica", sans-serif !important;
+    height: 100vh;
+}
+
+// reset styles
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    font: inherit;
+}
+
+input, select {
+    border: none;
+    color: var(--font-secodnary);
+    font: inherit;
+    font-size: 1rem;
+    padding-left: 1rem;
+}
+
+select {
+    cursor: pointer;
+}
+
+.closeIcon {
+    cursor: pointer;
+}
+
+.mainBtn {
+    border-radius: var(--bg-radius);
+    cursor: pointer;
+    height: 50px;
+    font-size: .95rem;
+    // width: 115px;
+
+    &:hover {
+        background-color: var(--font-main-hover) !important;
+    }
+}
+
