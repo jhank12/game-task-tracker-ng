@@ -1,0 +1,16 @@
+.labelInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+        color: var(--font-gray);
+
+    }
+
+    input {
+        background-color: var(--bg-secondary) !important;
+        border-radius: 8px !important;
+        height: 50px !important;
+    }
+}

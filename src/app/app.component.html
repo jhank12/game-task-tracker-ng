@@ -1,18 +1,20 @@
 <div class="siteContainer">
-  <section class="sidebar">
+  <!-- <section class="sidebar">
     <nav>
       <ul>
-        @for(board of projectBoards; track board.id) {
-        <li (click)="setSelectedId(board.id)">{{ board.name }}</li>
+        @for(board of projectBoards(); track board.id) {
+        <li (click)="appService.setSelectedId(board.id)">{{ board?.name }}</li>
 
         }
       </ul>
     </nav>
-  </section>
+  </section> -->
+
+  <app-sidebar />
 
   <main>
     <header>
-      <h1>{{ projectBoard.name }}</h1>
+      <h1>{{ board()?.name }}</h1>
 
       <div class="boardActions">
         <button class="mainBtn" (click)="openModal()">Add Column</button>
@@ -23,8 +25,10 @@
       </div>
     </header>
 
-    <section class="columnsContainer">
-      @for(col of projectBoard?.columnsArr; track col.id) {
+    <app-columns />
+
+    <!-- <section class="columnsContainer">
+      @for(col of board()?.columnsArr; track col.id) {
       <div class="column">
         <header class="columnHeader">
           <p class="columnName">
@@ -42,16 +46,15 @@
           </div>
         </header>
 
-        @for(task of col.tasks; track task) {
+        <div class="tasksContainer">
+          @for(task of col.tasks; track task.id) {
+          <app-task [task]="task" />
 
-        <div class="task">
-          <p>{{ task.taskName }}</p>
+          }
         </div>
-
-        }
       </div>
       }
-    </section>
+    </section> -->
   </main>
 </div>
 

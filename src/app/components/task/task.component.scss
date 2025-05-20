@@ -1,0 +1,39 @@
+.task { 
+
+    align-items: center;
+    background-color: var(--bg-lighter);
+    border-radius: 8px;
+    color: var(--font-secondary);
+    display: flex;
+    justify-content: space-between;
+    height: 75px;
+    padding: 1rem;
+}
+
+.priorityTag {
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 6px 15px;
+    
+    p { 
+        font-size: .9rem;
+        z-index: 10;
+    }
+    
+}
+
+.high-priority {
+    background-color: rgba(255, 77, 77, .25);
+    color:  var(--priority-high);
+}
+
+.medium-priority {
+    background-color:  rgba(255, 179, 66, .25);
+    color:  var(--priority-medium);
+}
+
+.low-priority {
+    background-color: rgba(77, 255, 101, .25);
+    color:  var(--priority-low);
+
+}

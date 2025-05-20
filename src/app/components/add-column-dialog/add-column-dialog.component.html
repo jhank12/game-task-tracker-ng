@@ -1,14 +1,16 @@
 <!-- <dialog> -->
+
+<!-- create dialog component with the div with dialog container class -->
 <div class="dialogContainer">
   <header>
-    <h2>Add New Column</h2>
+    <h2>Add Column</h2>
     <span class="material-symbols-outlined closeIcon" (click)="closeModal()">
       close
     </span>
   </header>
 
   <form [formGroup]="newColumnForm">
-    <div class="labelInputContainer">
+    <app-label-input>
       <label for="colNameInput">Column Name</label>
       <input
         type="text"
@@ -16,11 +18,10 @@
         name="colNameInput"
         [formControl]="newColumnForm.controls.columnName"
       />
-
       @if(columnIsInvalid) {
       <p>Error: Enter a valid name.</p>
       }
-    </div>
+    </app-label-input>
 
     <div class="formTasksSection">
       @if(tasks.length > 0) {
@@ -37,7 +38,7 @@
             formControlName="priority"
           >
             <option value="high">High</option>
-            <option value="moderate">Moderate</option>
+            <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
 
@@ -55,7 +56,7 @@
       </button>
     </div>
 
-    <button class="mainBtn" (click)="addColumnSubmit()">Submit</button>
+    <button class="mainBtn" (click)="submitNewColumn()">Add Column</button>
   </form>
 </div>
 

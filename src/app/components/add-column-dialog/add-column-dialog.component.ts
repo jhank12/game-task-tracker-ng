@@ -1,9 +1,12 @@
+import { v4 as uuid } from 'uuid';
+
 import {
   Component,
   EventEmitter,
   Input,
   ElementRef,
   ViewChild,
+  inject,
 } from '@angular/core';
 
 import {
@@ -14,13 +17,18 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { AppService } from '../../app.service';
+
+import { Column, Task } from '../../models/models';
+
 import { DialogComponent } from '../reusable/dialog/dialog.component';
+import { LabelInputComponent } from '../reusable/label-input/label-input.component';
 
 // emit the dialog element ref from here and pass in showmodal function
 
 @Component({
   selector: 'app-add-column-dialog',
-  imports: [ReactiveFormsModule, DialogComponent],
+  imports: [ReactiveFormsModule, DialogComponent, LabelInputComponent],
   templateUrl: './add-column-dialog.component.html',
   styleUrl: './add-column-dialog.component.scss',
 })
@@ -30,6 +38,8 @@ export class AddColumnDialogComponent {
 
   // @ViewChild('createColumnDialog')
   // createColumnDialog!: ElementRef<HTMLDialogElement>;
+
+  appService = inject(AppService);
 
   @Input() dialogRef!: ElementRef<HTMLDialogElement>;
 
@@ -53,7 +63,7 @@ export class AddColumnDialogComponent {
   addTaskToFormArray() {
     const newTaskGroup = new FormGroup({
       taskname: new FormControl(''),
-      priority: new FormControl<'high' | 'moderate' | 'low'>('high'),
+      priority: new FormControl<'high' | 'medium' | 'low'>('high'),
     });
     this.tasks.push(newTaskGroup);
   }
@@ -64,17 +74,34 @@ export class AddColumnDialogComponent {
     this.tasks.removeAt(index);
   }
 
-  addColumnSubmit() {
-    console.log(this.newColumnForm.value);
-    // const newColumnObj = {
-    //   id: '3',
-    //   colName: this.newColumnName,
-    //   PLACEHOLDERCOUNT: 2,
-    //   tasks: this.tasksArr.length > 0 ? [...this.tasksArr] : [],
-    // };
-    // this.columnsArr = [...this.columnsArr, newColumnObj];
-    // this.closeModal();
-    // console.log(this.tasksArr);
+  submitNewColumn() {
+    if (this.newColumnForm.valid) {
+      const { columnName, tasks } = this.newColumnForm.value;
+
+      // add ids to tasks
+      const updatedTasks: Task[] | undefined = tasks?.map((task) => {
+        const { taskname, priority } = task;
+        const updatedTask: Task = {
+          id: uuid(),
+          taskName: taskname,
+          priority: priority,
+        };
+        return updatedTask;
+      });
+
+      if (columnName !== undefined && columnName !== null) {
+        const newColumnObj: Column = {
+          id: uuid(),
+          colName: columnName,
+          tasks: updatedTasks,
+          PLACEHOLDERCOUNT: tasks?.length,
+        };
+
+        this.appService.addColumn(newColumnObj);
+      }
+    } else {
+      alert('invalid form');
+    }
   }
 
   closeModal() {

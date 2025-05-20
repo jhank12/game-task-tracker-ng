@@ -1,0 +1,22 @@
+<section class="sidebar">
+  <nav>
+    <ul>
+      @for(board of projectBoards(); track board.id) {
+      <li
+        [ngClass]="{
+          sidebarLinkActive: this.appService.selectedId().toString() == board.id
+        }"
+        (click)="appService.setSelectedId(board.id)"
+      >
+        <div>
+          <span class="material-symbols-outlined"> view_kanban </span>
+          {{ board?.name }}
+        </div>
+
+        <p>8</p>
+      </li>
+
+      }
+    </ul>
+  </nav>
+</section>

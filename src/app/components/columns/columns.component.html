@@ -1,0 +1,33 @@
+<section class="columnsContainer">
+  @for(col of columns; track col.id) {
+  <div class="column">
+    <header class="columnHeader">
+      <p class="columnName">
+        {{ col.colName }}
+      </p>
+
+      <div class="columnActions">
+        <button class="actionBtn" (click)="openAddTaskModal(col.id)">
+          <span class="material-symbols-outlined"> add </span>
+        </button>
+
+        <button class="actionBtn">
+          <span class="material-symbols-outlined"> more_vert </span>
+        </button>
+      </div>
+    </header>
+
+    <div class="tasksContainer">
+      @for(task of col.tasks; track task.id; let idx = $index) {
+      <app-task
+        [task]="task"
+        [colId]="col.id"
+        [taskIdx]="idx"
+        (delete)="deleteTask(col.id, task.id)"
+      />
+
+      }
+    </div>
+  </div>
+  }
+</section>

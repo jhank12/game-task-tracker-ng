@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -6,13 +6,22 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppService } from './app.service';
+
+import { ProjectBoard } from './models/models';
 import { AddColumnDialogComponent } from './components/add-column-dialog/add-column-dialog.component';
+import { ColumnsComponent } from './components/columns/columns.component';
+import { TaskComponent } from './components/task/task.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
     AddColumnDialogComponent,
+    SidebarComponent,
+    ColumnsComponent,
+    TaskComponent,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
@@ -25,16 +34,10 @@ export class AppComponent {
   @ViewChild('createColumnDialog')
   createColumnDialog!: ElementRef<HTMLDialogElement>;
 
-  selectedId = this.projectBoards.length > 0 ? this.projectBoards[0].id : '';
+  appService = inject(AppService);
 
-  get projectBoard() {
-    return this.projectBoards?.filter((board) => {
-      return board.id == this.selectedId;
-    })[0];
-  }
-
-  setSelectedId(id: string) {
-    this.selectedId = id;
+  get board() {
+    return this.appService.selectedProjectBoard;
   }
 
   constructor(private _matDialog: MatDialog) {}

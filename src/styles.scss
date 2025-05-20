@@ -10,6 +10,7 @@
     --bg-main: #191919;
     --bg-secondary: #1F1F1F;
     --bg-secondary-hover: #292929;
+    --bg-lighter: #262626;
     --border: #393939;
 
     --border-full: 1px solid var(--border);
@@ -24,6 +25,11 @@
     --font-gray-hover: #a7a7a7;
     --font-red: #FF4D4D;
     --font-green: #64EC42;
+
+    --priority-high: #FF4D4D;
+    --priority-medium: #FFB342;
+    --priority-low: #4DFF65;
+
 
 
     --border-radius: 15px;
@@ -56,11 +62,13 @@ button {
 }
 
 input, select {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
     border: none;
-    color: var(--font-secodnary);
-    font: inherit;
+    color: var(--font-secondary);
     font-size: 1rem;
     padding-left: 1rem;
+    height: 50px;
 }
 
 select {
@@ -76,10 +84,66 @@ select {
     cursor: pointer;
     height: 50px;
     font-size: .95rem;
-    // width: 115px;
 
     &:hover {
         background-color: var(--font-main-hover) !important;
     }
 }
 
+.dialogContainer {
+    background-color: var(--bg-main);
+    border: none;
+    border-radius: var(--border-radius);
+    // border: 1px solid white;
+    color: var(--font-main);
+    padding: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    height: 100%;
+    width: 100%;
+
+    &::backdrop {
+        background-color: rgba(0,0,0, .25);
+    } 
+
+    header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            background-color: var(--font-main);
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+    
+    }
+
+
+}
+
+.labelInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+
+    label {
+        color: var(--font-gray);
+
+    }
+
+    input {
+        background-color: var(--bg-secondary) !important;
+        border-radius: 8px !important;
+        height: 50px !important;
+    }
+}

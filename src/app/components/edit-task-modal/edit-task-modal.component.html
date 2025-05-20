@@ -1,0 +1,35 @@
+<div class="dialogContainer">
+  <header>
+    <h2>Edit Task</h2>
+    <span class="material-symbols-outlined closeIcon" mat-dialog-close>
+      close
+    </span>
+  </header>
+
+  <form [formGroup]="editTaskForm">
+    <div class="labelInputContainer">
+      <label for="updatedTaskName">Taskname</label>
+      <input
+        type="text"
+        id="updatedTaskName"
+        name="updatedTaskName"
+        formControlName="updatedTaskName"
+      />
+    </div>
+
+    <div class="labelInputContainer">
+      <label for="updatedPrioritySelect">Task Priority</label>
+      <select
+        id="updatedPrioritySelect"
+        name="updatedPrioritySelect"
+        formControlName="updatedPrioritySelect"
+      >
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+
+    <button class="mainBtn" (click)="submitEditTask()">Submit</button>
+  </form>
+</div>

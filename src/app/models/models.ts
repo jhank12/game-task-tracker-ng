@@ -9,11 +9,11 @@ export interface Column {
   colName: string;
   tasks?: Task[];
 
-  PLACEHOLDERCOUNT: number;
+  PLACEHOLDERCOUNT?: number;
 }
 
 export interface ProjectBoard {
   id: string;
   name: string;
-  columnsArr: Column[];
+  columnsArr?: Column[];
 }

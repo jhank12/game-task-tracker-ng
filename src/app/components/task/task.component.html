@@ -1,0 +1,11 @@
+<div class="task">
+  <p>{{ task.taskName }}</p>
+
+  <div [class]="`priorityTag ${task.priority.toLocaleLowerCase()}-priority`">
+    <p>{{ task.priority }}</p>
+  </div>
+
+  <button (click)="openEditTaskModal()">edit</button>
+
+  <button (click)="deleteTask()">delete</button>
+</div>
