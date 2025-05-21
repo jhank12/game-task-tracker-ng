@@ -19,12 +19,7 @@
 
     <div class="tasksContainer">
       @for(task of col.tasks; track task.id; let idx = $index) {
-      <app-task
-        [task]="task"
-        [colId]="col.id"
-        [taskIdx]="idx"
-        (delete)="deleteTask(col.id, task.id)"
-      />
+      <app-task [task]="task" [colId]="col.id" [taskIdx]="idx" />
 
       }
     </div>

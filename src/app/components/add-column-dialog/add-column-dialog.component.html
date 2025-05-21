@@ -1,64 +1,67 @@
 <!-- <dialog> -->
 
 <!-- create dialog component with the div with dialog container class -->
-<div class="dialogContainer">
-  <header>
-    <h2>Add Column</h2>
+<!-- <div class="dialogContainer"> -->
+<header>
+  <h2>Add Column</h2>
+
+  <button (click)="closeModal()">
     <span class="material-symbols-outlined closeIcon" (click)="closeModal()">
       close
     </span>
-  </header>
+  </button>
+</header>
 
-  <form [formGroup]="newColumnForm">
-    <app-label-input>
-      <label for="colNameInput">Column Name</label>
-      <input
-        type="text"
-        id="colNameInput"
-        name="colNameInput"
-        [formControl]="newColumnForm.controls.columnName"
-      />
-      @if(columnIsInvalid) {
-      <p>Error: Enter a valid name.</p>
-      }
-    </app-label-input>
+<form [formGroup]="newColumnForm">
+  <app-label-input>
+    <label for="colNameInput">Column Name</label>
+    <input
+      type="text"
+      id="colNameInput"
+      name="colNameInput"
+      [formControl]="newColumnForm.controls.columnName"
+    />
+    @if(columnIsInvalid) {
+    <p>Error: Enter a valid name.</p>
+    }
+  </app-label-input>
 
-    <div class="formTasksSection">
-      @if(tasks.length > 0) {
-      <p>Tasks</p>
-      }
+  <div class="formTasksSection">
+    @if(tasks.length > 0) {
+    <p>Tasks</p>
+    }
 
-      <div class="colFormTasks" formArrayName="tasks">
-        @for(task of tasks.controls; track $index) {
-        <div class="taskInputPriorityContainer" [formGroupName]="$index">
-          <input type="text" formControlName="taskname" />
-          <select
-            name="prioritySelect"
-            id="prioritySelect"
-            formControlName="priority"
-          >
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
+    <div class="colFormTasks" formArrayName="tasks">
+      @for(task of tasks.controls; track $index) {
+      <div class="taskInputPriorityContainer" [formGroupName]="$index">
+        <input type="text" formControlName="taskname" />
+        <select
+          name="prioritySelect"
+          id="prioritySelect"
+          formControlName="priority"
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
 
-          <button class="removeTaskBtn" (click)="deleteTask($index)">
-            <span class="material-symbols-outlined"> remove </span>
-          </button>
-        </div>
-
-        }
+        <button class="removeTaskBtn" (click)="deleteTask($index)">
+          <span class="material-symbols-outlined"> remove </span>
+        </button>
       </div>
 
-      <button class="addTaskBtn" (click)="addTaskToFormArray()">
-        <span class="material-symbols-outlined"> add_circle </span>
-        Add Task
-      </button>
+      }
     </div>
 
-    <button class="mainBtn" (click)="submitNewColumn()">Add Column</button>
-  </form>
-</div>
+    <button class="addTaskBtn" (click)="addTaskToFormArray()">
+      <span class="material-symbols-outlined"> add_circle </span>
+      Add Task
+    </button>
+  </div>
+
+  <button class="mainBtn" (click)="submitNewColumn()">Add Column</button>
+</form>
+<!-- </div> -->
 
 <!-- </dialog> -->
 

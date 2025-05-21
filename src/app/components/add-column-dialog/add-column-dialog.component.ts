@@ -17,6 +17,8 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { AppService } from '../../app.service';
 
 import { Column, Task } from '../../models/models';
@@ -33,13 +35,15 @@ import { LabelInputComponent } from '../reusable/label-input/label-input.compone
   styleUrl: './add-column-dialog.component.scss',
 })
 export class AddColumnDialogComponent {
-  @Input() close = new EventEmitter();
-  @Input() open = new EventEmitter();
+  // @Input() close = new EventEmitter();
+  // @Input() open = new EventEmitter();
 
   // @ViewChild('createColumnDialog')
   // createColumnDialog!: ElementRef<HTMLDialogElement>;
 
   appService = inject(AppService);
+
+  constructor(private _matDialog: MatDialog) {}
 
   @Input() dialogRef!: ElementRef<HTMLDialogElement>;
 
@@ -48,6 +52,10 @@ export class AddColumnDialogComponent {
     columnName: new FormControl('', { validators: [Validators.required] }),
     tasks: new FormArray([]),
   });
+
+  closeModal() {
+    this._matDialog.closeAll();
+  }
 
   get columnIsInvalid() {
     return (
@@ -63,7 +71,7 @@ export class AddColumnDialogComponent {
   addTaskToFormArray() {
     const newTaskGroup = new FormGroup({
       taskname: new FormControl(''),
-      priority: new FormControl<'high' | 'medium' | 'low'>('high'),
+      priority: new FormControl<'High' | 'Medium' | 'Low'>('High'),
     });
     this.tasks.push(newTaskGroup);
   }
@@ -98,13 +106,15 @@ export class AddColumnDialogComponent {
         };
 
         this.appService.addColumn(newColumnObj);
+
+        this.closeModal();
       }
     } else {
       alert('invalid form');
     }
   }
 
-  closeModal() {
-    this.close.emit();
-  }
+  // closeModal() {
+  //   this.close.emit();
+  // }
 }

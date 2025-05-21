@@ -1,35 +1,35 @@
-<div class="dialogContainer">
-  <header>
-    <h2>Edit Task</h2>
+<header>
+  <h2>Edit Task</h2>
+  <button class="actionBtn" (click)="closeModal()">
     <span class="material-symbols-outlined closeIcon" mat-dialog-close>
       close
     </span>
-  </header>
+  </button>
+</header>
 
-  <form [formGroup]="editTaskForm">
-    <div class="labelInputContainer">
-      <label for="updatedTaskName">Taskname</label>
-      <input
-        type="text"
-        id="updatedTaskName"
-        name="updatedTaskName"
-        formControlName="updatedTaskName"
-      />
-    </div>
+<form [formGroup]="editTaskForm">
+  <div class="labelInputContainer">
+    <label for="updatedTaskName">Taskname</label>
+    <input
+      type="text"
+      id="updatedTaskName"
+      name="updatedTaskName"
+      formControlName="updatedTaskName"
+    />
+  </div>
 
-    <div class="labelInputContainer">
-      <label for="updatedPrioritySelect">Task Priority</label>
-      <select
-        id="updatedPrioritySelect"
-        name="updatedPrioritySelect"
-        formControlName="updatedPrioritySelect"
-      >
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-    </div>
+  <div class="labelInputContainer">
+    <label for="updatedPrioritySelect">Task Priority</label>
+    <select
+      id="updatedPrioritySelect"
+      name="updatedPrioritySelect"
+      formControlName="updatedPrioritySelect"
+    >
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+  </div>
 
-    <button class="mainBtn" (click)="submitEditTask()">Submit</button>
-  </form>
-</div>
+  <button class="mainBtn" (click)="submitEditTask()">Submit</button>
+</form>

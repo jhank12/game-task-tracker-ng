@@ -1,0 +1,23 @@
+<header>
+  <h2>Edit Board</h2>
+  <button class="actionBtn" (click)="closeModal()">
+    <span class="material-symbols-outlined closeIcon" mat-dialog-close>
+      close
+    </span>
+  </button>
+</header>
+
+<form [formGroup]="editBoardForm">
+  <div class="labelInputContainer">
+    <label for="editBoardName">Board Name</label>
+
+    <input
+      type="text"
+      id="editBoardName"
+      name="editBoardName"
+      formControlName="updatedBoardName"
+    />
+  </div>
+
+  <button class="mainBtn" (click)="submitEditBoard()">Update</button>
+</form>

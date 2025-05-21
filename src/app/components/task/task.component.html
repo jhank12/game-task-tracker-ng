@@ -1,11 +1,19 @@
 <div class="task">
   <p>{{ task.taskName }}</p>
 
-  <div [class]="`priorityTag ${task.priority.toLocaleLowerCase()}-priority`">
-    <p>{{ task.priority }}</p>
+  <div class="priorityActionsContainer">
+    <div [class]="`priorityTag ${task.priority.toLocaleLowerCase()}-priority`">
+      <p>{{ task.priority }}</p>
+    </div>
+
+    <button class="actionBtn">
+      <span class="material-symbols-outlined" (click)="openTaskOptions()">
+        more_vert
+      </span>
+    </button>
   </div>
 
-  <button (click)="openEditTaskModal()">edit</button>
-
-  <button (click)="deleteTask()">delete</button>
+  @if(taskOptionsOpen) {
+  <app-task-options (open)="openEditTaskModal()" (delete)="deleteTask()" />
+  }
 </div>

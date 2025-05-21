@@ -56,11 +56,24 @@ export class AppService {
     });
   }
 
+  editBoard(updatedBoard: ProjectBoard) {
+    // get idx of current board
+    // update at that index
+
+    const boardIdx: number = this.projectBoards().findIndex(
+      (board) => board.id == updatedBoard.id
+    );
+
+    const boardsCopy: ProjectBoard[] = [...this.projectBoards()];
+
+    boardsCopy[boardIdx] = updatedBoard;
+
+    this.projectBoards.set([...boardsCopy]);
+  }
+
   addColumn(newColumn: Column) {
     const prevCols: Column[] | undefined =
       this.selectedProjectBoard().columnsArr;
-
-    console.log(newColumn.tasks);
 
     if (prevCols !== undefined && prevCols.length > 0) {
       this.selectedProjectBoard().columnsArr = [...prevCols, newColumn];
@@ -70,10 +83,6 @@ export class AppService {
   }
 
   addTask(newTask: Task, colId: string) {
-    // const column:Column = this.selectedProjectBoard.columnsArr()?.filter(col => {
-    //   return colId === col.id
-    // })[0];
-
     const column: Column = this.selectedProjectBoard().columnsArr?.filter(
       (col: Column) => {
         return colId === col.id;
@@ -86,7 +95,6 @@ export class AppService {
   }
 
   editTask(updatedTask: Task, colId: string, taskIdx: number) {
-    console.log('works');
     const column: Column = this.selectedProjectBoard().columnsArr?.filter(
       (col: Column) => {
         return colId === col.id;

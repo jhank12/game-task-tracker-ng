@@ -6,7 +6,11 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogContent } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogContent,
+  MatDialog,
+} from '@angular/material/dialog';
 
 import { AppService } from '../../app.service';
 import { Task } from '../../models/models';
@@ -28,13 +32,18 @@ export class EditTaskModalComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: EditTaskData
+    public data: EditTaskData,
+    private _matDialog: MatDialog
   ) {}
 
   @Input() editTaskForm = new FormGroup({
     updatedTaskName: new FormControl<string>(''),
     updatedPrioritySelect: new FormControl<string>(''),
   });
+
+  closeModal() {
+    this._matDialog.closeAll();
+  }
 
   submitEditTask() {
     const { updatedTaskName: taskName, updatedPrioritySelect: priority } =
@@ -64,6 +73,8 @@ export class EditTaskModalComponent {
           this.data.colId,
           this.data.taskIdx
         );
+
+        this.closeModal();
       } else {
       }
     } else {
@@ -74,7 +85,7 @@ export class EditTaskModalComponent {
   ngOnInit() {
     this.editTaskForm.setValue({
       updatedTaskName: this.data.task.taskName,
-      updatedPrioritySelect: this.data.task.priority.toLowerCase(),
+      updatedPrioritySelect: this.data.task.priority,
     });
   }
 }

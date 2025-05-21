@@ -1,25 +1,23 @@
-<div class="dialogContainer">
-  <header>
-    <h2>Add Task</h2>
-    <!-- <mat-dialog-actions> -->
-    <!-- <button class="actionBtn" mat-button> -->
-    <span class="material-symbols-outlined closeIcon" mat-dialog-close>
-      close
-    </span>
-    <!-- </button> -->
-    <!-- </mat-dialog-actions> -->
-  </header>
+<!-- <div class="dialogContainer"> -->
+<header>
+  <h2>Add Task</h2>
+  <!-- <mat-dialog-actions> -->
+  <button class="actionBtn" (click)="closeModal()">
+    <span class="material-symbols-outlined closeIcon"> close </span>
+  </button>
+  <!-- </mat-dialog-actions> -->
+</header>
 
-  <form [formGroup]="newTaskForm">
-    <div class="labelInputContainer">
-      <label for="taskName">Task Name</label>
-      <input
-        type="text"
-        id="taskName"
-        name="taskName"
-        [formControl]="newTaskForm.controls.taskName"
-      />
-    </div>
-    <button class="mainBtn" (click)="submitNewTask()">Add Task</button>
-  </form>
-</div>
+<form [formGroup]="newTaskForm">
+  <div class="labelInputContainer">
+    <label for="taskName">Task Name</label>
+    <input
+      type="text"
+      id="taskName"
+      name="taskName"
+      [formControl]="newTaskForm.controls.taskName"
+    />
+  </div>
+  <button class="mainBtn" (click)="submitNewTask()">Add Task</button>
+</form>
+<!-- </div> -->

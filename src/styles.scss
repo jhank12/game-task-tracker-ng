@@ -1,149 +1,160 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
+  // colors
+  --bg-main: #191919;
+  --bg-secondary: #1f1f1f;
+  --bg-secondary-hover: #292929;
+  --bg-lighter: #262626;
+  --border: #393939;
 
-    // colors
-    --bg-main: #191919;
-    --bg-secondary: #1F1F1F;
-    --bg-secondary-hover: #292929;
-    --bg-lighter: #262626;
-    --border: #393939;
+  --border-full: 1px solid var(--border);
 
-    --border-full: 1px solid var(--border);
+  --bg-radius: 10px;
 
-    --bg-radius: 10px;
+  --font-main: #dedede;
+  --font-main-hover: #e8e8e8;
 
-    --font-main: #dedede;
-    --font-main-hover: #e8e8e8;
+  --font-secondary: #c9c9c9;
+  --font-gray: #949494;
+  --font-gray-hover: #a7a7a7;
+  --font-red: #ff4d4d;
+  --font-green: #64ec42;
 
-    --font-secondary: #c9c9c9;
-    --font-gray: #949494;
-    --font-gray-hover: #a7a7a7;
-    --font-red: #FF4D4D;
-    --font-green: #64EC42;
+  --priority-high: #ff4d4d;
+  --priority-medium: #ffb342;
+  --priority-low: #4dff65;
 
-    --priority-high: #FF4D4D;
-    --priority-medium: #FFB342;
-    --priority-low: #4DFF65;
-
-
-
-    --border-radius: 15px;
-    --scale-hover: 1.01;
+  --border-radius: 15px;
+  --scale-hover: 1.01;
 }
 
-html, body { 
-    height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--font-main);
-    font-family: "Helvetica", sans-serif !important;
-    height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--font-main);
+  font-family: "Helvetica", sans-serif !important;
+  height: 100vh;
 }
 
 // reset styles
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-    border: none;
-    font: inherit;
+  border: none;
+  font: inherit;
 }
 
-input, select {
-    background-color: var(--bg-secondary);
-    border-radius: 8px;
-    border: none;
-    color: var(--font-secondary);
-    font-size: 1rem;
-    padding-left: 1rem;
-    height: 50px;
+input,
+select {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  border: none;
+  color: var(--font-secondary);
+  font-size: 1rem;
+  padding-left: 1rem;
+  height: 50px;
 }
 
 select {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .closeIcon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .mainBtn {
-    border-radius: var(--bg-radius);
-    cursor: pointer;
-    height: 50px;
-    font-size: .95rem;
+  border-radius: var(--bg-radius);
+  cursor: pointer;
+  height: 50px;
+  font-size: 0.95rem;
 
-    &:hover {
-        background-color: var(--font-main-hover) !important;
-    }
+  &:hover {
+    background-color: var(--font-main-hover) !important;
+  }
 }
 
 .dialogContainer {
-    background-color: var(--bg-main);
-    border: none;
-    border-radius: var(--border-radius);
-    // border: 1px solid white;
-    color: var(--font-main);
-    padding: 2rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    height: 100%;
-    width: 100%;
+  background-color: var(--bg-main) !important;
+  border: none;
+  border-radius: 15px;
+  color: var(--font-main);
+  position: absolute;
+  width: 25%;
 
-    &::backdrop {
-        background-color: rgba(0,0,0, .25);
-    } 
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
 
-    header {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 
-        button {
-            background-color: var(--font-main);
-        }
+    button {
+      background-color: var(--font-main);
+      align-items: center;
+      background-color: transparent !important;
+      border-radius: 50px;
+      color: var(--font-gray);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      padding: 2px;
+
+      &:hover {
+        color: var(--font-gray-hover);
+      }
     }
+  }
 
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        margin-top: 2rem;
-    
-    }
+  form {
+    background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+}
 
+.mat-mdc-dialog-container {
+  //   border-radius: 0 !important;
+  --mdc-dialog-container-color: transparent;
+  padding: 2rem;
+}
 
+.mat-mdc-dialog-surface,
+.mdc-dialog__surface {
+  border-radius: 0 !important;
 }
 
 .labelInputContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 
+  label {
+    color: var(--font-gray);
+  }
 
-    label {
-        color: var(--font-gray);
-
-    }
-
-    input {
-        background-color: var(--bg-secondary) !important;
-        border-radius: 8px !important;
-        height: 50px !important;
-    }
+  input {
+    background-color: var(--bg-secondary) !important;
+    border-radius: 8px !important;
+    height: 50px !important;
+  }
 }

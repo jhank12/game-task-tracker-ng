@@ -1,0 +1,37 @@
+.taskOptionsContainer {
+  background-color: var(--bg-lighter);
+  border-radius: 15px;
+  color: var(--font-gray);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  right: -215px;
+  transform: translateY(-50%);
+  width: 200px;
+
+  div {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    position: relative;
+
+    &:hover {
+      color: var(--font-secondary);
+    }
+  }
+}
+
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog
+// work on closing dialog

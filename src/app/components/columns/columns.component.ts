@@ -29,8 +29,7 @@ export class ColumnsComponent {
   openAddTaskModal(colId: string) {
     this._matDialog.open(AddTaskModalComponent, {
       data: colId,
-      width: '600px',
-      height: '400px',
+      panelClass: 'dialogContainer',
     });
   }
 }

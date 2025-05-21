@@ -13,6 +13,7 @@ import { AddColumnDialogComponent } from './components/add-column-dialog/add-col
 import { ColumnsComponent } from './components/columns/columns.component';
 import { TaskComponent } from './components/task/task.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { EditBoardModalComponent } from './components/edit-board-modal/edit-board-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ReactiveFormsModule,
     MatIconModule,
     MatDialogModule,
+    EditBoardModalComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -44,13 +46,21 @@ export class AppComponent {
 
   openModal() {
     this._matDialog.open(AddColumnDialogComponent, {
-      width: '600px',
-      height: '400px',
+      // width: '600px',
+      // height: '400px',
+      panelClass: 'dialogContainer',
     });
   }
 
   closeModal() {
     this.createColumnDialog.nativeElement.close();
     this._matDialog.closeAll();
+  }
+
+  openEditBoardModal() {
+    this._matDialog.open(EditBoardModalComponent, {
+      data: this.board(),
+      panelClass: 'dialogContainer',
+    });
   }
 }

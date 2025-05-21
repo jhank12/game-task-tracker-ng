@@ -6,10 +6,11 @@ import { AppService } from '../../app.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
+import { TaskOptionsComponent } from '../task-options/task-options.component';
 
 @Component({
   selector: 'app-task',
-  imports: [EditTaskModalComponent],
+  imports: [EditTaskModalComponent, TaskOptionsComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })
@@ -22,15 +23,25 @@ export class TaskComponent {
 
   constructor(private _matDialog: MatDialog) {}
 
+  taskOptionsOpen: boolean = false;
+
+  // toggles temporarily
+  openTaskOptions() {
+    this.taskOptionsOpen = !this.taskOptionsOpen;
+  }
+
   openEditTaskModal() {
+    this.taskOptionsOpen = false;
     this._matDialog.open(EditTaskModalComponent, {
       data: { task: this.task, colId: this.colId, taskIdx: this.taskIdx },
-      width: '600px',
-      height: '400px',
+      panelClass: 'dialogContainer',
     });
   }
 
   deleteTask() {
+    console.log('delete test');
+    this.taskOptionsOpen = false;
+
     this.appService.deleteTask(this.colId, this.task.id);
   }
 }

@@ -2,7 +2,11 @@ import { Component, Inject, inject, Input } from '@angular/core';
 
 import { v4 as uuid } from 'uuid';
 
-import { MatDialogClose, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogClose,
+  MAT_DIALOG_DATA,
+  MatDialog,
+} from '@angular/material/dialog';
 
 import {
   ReactiveFormsModule,
@@ -27,16 +31,23 @@ export class AddTaskModalComponent {
 
   @Input() newTaskForm = new FormGroup({
     taskName: new FormControl('', { validators: [Validators.required] }),
-    priority: new FormControl<'high' | 'medium' | 'low'>('high'),
+    priority: new FormControl<'High' | 'Medium' | 'Low'>('High'),
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: string,
+    private _matDialog: MatDialog
+  ) {}
 
   get taskIsInvalid() {
     return (
       this.newTaskForm.controls.taskName.invalid &&
       this.newTaskForm.controls.taskName.dirty
     );
+  }
+
+  closeModal() {
+    this._matDialog.closeAll();
   }
 
   submitNewTask() {
@@ -52,6 +63,7 @@ export class AddTaskModalComponent {
           priority: priority!,
         };
         this.appService.addTask(newTask, this.data);
+        this.closeModal();
       }
     } else {
       alert('invalid inputs');
