@@ -53,6 +53,12 @@ export class AddColumnDialogComponent {
     tasks: new FormArray([]),
   });
 
+  addTasks: boolean = true;
+
+  toggleAddTasks() {
+    this.addTasks = !this.addTasks;
+  }
+
   closeModal() {
     this._matDialog.closeAll();
   }
@@ -68,10 +74,16 @@ export class AddColumnDialogComponent {
     return this.newColumnForm.get('tasks') as FormArray;
   }
 
+  getFormGroup(index: number): FormGroup {
+    return this.tasks.controls[index] as FormGroup;
+  }
+
   addTaskToFormArray() {
     const newTaskGroup = new FormGroup({
-      taskname: new FormControl(''),
-      priority: new FormControl<'High' | 'Medium' | 'Low'>('High'),
+      taskname: new FormControl('', { validators: [Validators.required] }),
+      priority: new FormControl<'High' | 'Medium' | 'Low'>('High', {
+        validators: [Validators.required],
+      }),
     });
     this.tasks.push(newTaskGroup);
   }
@@ -80,6 +92,8 @@ export class AddColumnDialogComponent {
   deleteTask(index: number) {
     // console.log(this.tasks);
     this.tasks.removeAt(index);
+
+    console.log(this.tasks.controls);
   }
 
   submitNewColumn() {

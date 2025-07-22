@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -8,26 +7,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppService } from './app.service';
 
-import { ProjectBoard } from './models/models';
 import { AddColumnDialogComponent } from './components/add-column-dialog/add-column-dialog.component';
 import { ColumnsComponent } from './components/columns/columns.component';
-import { TaskComponent } from './components/task/task.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { EditBoardModalComponent } from './components/edit-board-modal/edit-board-modal.component';
+
+import { HomeComponent } from './components/home/home.component';
+
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
-    AddColumnDialogComponent,
     SidebarComponent,
     ColumnsComponent,
-    TaskComponent,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     MatDialogModule,
-    EditBoardModalComponent,
+    HomeComponent,
+    RouterOutlet,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -42,13 +41,16 @@ export class AppComponent {
     return this.appService.selectedProjectBoard;
   }
 
+  get boards() {
+    return this.appService.projectBoards;
+  }
+
   constructor(private _matDialog: MatDialog) {}
 
   openModal() {
     this._matDialog.open(AddColumnDialogComponent, {
-      // width: '600px',
-      // height: '400px',
       panelClass: 'dialogContainer',
+      width: '500px',
     });
   }
 

@@ -1,0 +1,20 @@
+<header>
+  <h2>Add Board</h2>
+
+  <button (click)="closeModal()">
+    <span class="material-symbols-outlined closeIcon"> close </span>
+  </button>
+</header>
+
+<form [formGroup]="newBoardForm">
+  <app-label-input>
+    <label for="boardNameInput">Board Name</label>
+    <input
+      [formControl]="newBoardForm.controls.boardName"
+      id="boardNameInput"
+      name="boardNameInput"
+    />
+  </app-label-input>
+
+  <button class="mainBtn" (click)="submitNewBoard()">Create Board</button>
+</form>

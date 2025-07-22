@@ -1,0 +1,15 @@
+.boardsContainer {
+  display: flex;
+  gap: 1rem;
+
+  .boardLink {
+    background-color: var(--bg-secondary);
+    color: var(--font-secondary);
+    cursor: pointer;
+    padding: 1rem;
+
+    &:hover {
+      background-color: var(--bg-secondary-hover);
+    }
+  }
+}

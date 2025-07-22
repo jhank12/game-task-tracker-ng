@@ -26,6 +26,7 @@
     }
   </app-label-input>
 
+  @if(addTasks) {
   <div class="formTasksSection">
     @if(tasks.length > 0) {
     <p>Tasks</p>
@@ -33,7 +34,7 @@
 
     <div class="colFormTasks" formArrayName="tasks">
       @for(task of tasks.controls; track $index) {
-      <div class="taskInputPriorityContainer" [formGroupName]="$index">
+      <div class="addColumnTask" [formGroup]="getFormGroup($index)">
         <input type="text" formControlName="taskname" />
         <select
           name="prioritySelect"
@@ -58,6 +59,8 @@
       Add Task
     </button>
   </div>
+
+  }
 
   <button class="mainBtn" (click)="submitNewColumn()">Add Column</button>
 </form>

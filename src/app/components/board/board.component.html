@@ -1,0 +1,22 @@
+<app-page-container>
+  <app-header-justify-between>
+    <h1>{{ board.name }}</h1>
+
+    <div class="boardActions">
+      <button class="mainBtn" (click)="openAddColumnModal()">Add Column</button>
+
+      <button class="ellipsisIcon" (click)="openEditBoardModal()">
+        <span class="material-symbols-outlined"> more_vert </span>
+      </button>
+    </div>
+  </app-header-justify-between>
+
+  @if(board.columnsArr && board.columnsArr.length > 0) {
+
+  <app-columns [columns]="board.columnsArr" />
+  } @else {
+
+  <p>no items</p>
+
+  }
+</app-page-container>

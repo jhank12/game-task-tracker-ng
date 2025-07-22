@@ -3,12 +3,34 @@ div.siteContainer {
   grid-template-columns: 250px 1fr;
   height: 100%;
 
+  padding: 2rem;
+
   main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding: 2rem 2.5rem;
     position: relative;
+
+    width: 100%;
+
+    div.boardsContainer {
+      display: flex;
+      gap: 2rem;
+
+      .boardLink {
+        cursor: pointer;
+        flex: 1;
+
+        .boardName {
+          font-size: 1.1rem;
+        }
+
+        .boardDate {
+          color: var(--font-gray);
+        }
+      }
+    }
 
     dialog {
       form {
@@ -65,9 +87,6 @@ div.siteContainer {
               }
             }
           }
-        }
-
-        .btnMain {
         }
       }
     }

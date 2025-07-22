@@ -14,7 +14,7 @@ export class AppService {
 
   projectBoards = signal<ProjectBoard[]>([
     {
-      id: uuid(),
+      id: '1',
       name: 'board1',
       columnsArr: [
         {
@@ -23,9 +23,7 @@ export class AppService {
           PLACEHOLDERCOUNT: 5,
           tasks: [
             { id: uuid(), taskName: 'Health Bar UI', priority: 'High' },
-
             { id: uuid(), taskName: 'Enemy UI', priority: 'Medium' },
-
             { id: uuid(), taskName: 'Health Bar UI', priority: 'Low' },
           ],
         },
@@ -33,27 +31,32 @@ export class AppService {
       ],
     },
     {
-      id: uuid(),
+      id: '2',
       name: 'board2',
       columnsArr: [
-        { id: uuid(), colName: 'UI', PLACEHOLDERCOUNT: 5, tasks: [] },
+        {
+          id: uuid(),
+          colName: 'UI',
+          PLACEHOLDERCOUNT: 5,
+          tasks: [{ id: uuid(), taskName: 'Player UI', priority: 'High' }],
+        },
         { id: uuid(), colName: 'Design', PLACEHOLDERCOUNT: 3, tasks: [] },
       ],
     },
   ]);
 
-  selectedId = signal<string>(this.projectBoards()[0].id);
+  selectedId = signal<string>(this.projectBoards()[0]?.id);
 
-  addBoardTest() {
-    const newBoardNum: number = this.projectBoards.length;
-    const newBoard: ProjectBoard = {
-      id: uuid(),
-      name: 'testBoard ' + newBoardNum,
-    };
+  addBoard(newBoard: ProjectBoard) {
+    if (this.projectBoards().length > 0) {
+      this.projectBoards.update((boards) => {
+        return [...boards, newBoard];
+      });
+    } else {
+      this.projectBoards.set([newBoard]);
 
-    this.projectBoards.update((boards) => {
-      return [...boards, newBoard];
-    });
+      this.selectedId.set(newBoard.id);
+    }
   }
 
   editBoard(updatedBoard: ProjectBoard) {
@@ -122,6 +125,7 @@ export class AppService {
   }
 
   setSelectedId(boardId: string) {
+    console.log(boardId);
     this.selectedId.set(boardId);
   }
 

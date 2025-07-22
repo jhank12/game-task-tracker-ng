@@ -1,6 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, Input } from '@angular/core';
 
 import { AppService } from '../../app.service';
+
+import { Column } from '../../models/models';
 
 import { MatDialog, MatDialogActions } from '@angular/material/dialog';
 
@@ -16,9 +18,7 @@ import { AddTaskModalComponent } from '../add-task-modal/add-task-modal.componen
 export class ColumnsComponent {
   appService = inject(AppService);
 
-  get columns() {
-    return this.appService.selectedProjectBoard().columnsArr;
-  }
+  @Input({ required: true }) columns!: Column[];
 
   constructor(private _matDialog: MatDialog) {}
 

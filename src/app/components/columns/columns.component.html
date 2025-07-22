@@ -1,5 +1,6 @@
 <section class="columnsContainer">
-  @for(col of columns; track col.id) {
+  @if(columns !== undefined && columns.length > 0) { @for(col of columns; track
+  col.id) {
   <div class="column">
     <header class="columnHeader">
       <p class="columnName">
@@ -24,5 +25,7 @@
       }
     </div>
   </div>
+  } } @else {
+  <p>You have no task columns.</p>
   }
 </section>
