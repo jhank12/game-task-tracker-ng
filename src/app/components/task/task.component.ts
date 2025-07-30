@@ -1,5 +1,9 @@
-import { Component, Input, EventEmitter, inject } from '@angular/core';
+import { Component, Input, EventEmitter, inject, signal } from '@angular/core';
 import { Task } from '../../models/models';
+
+import { NgClass } from '@angular/common';
+
+import { DatePipe } from '@angular/common';
 
 import { AppService } from '../../app.service';
 
@@ -8,9 +12,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditTaskModalComponent } from '../edit-task-modal/edit-task-modal.component';
 import { TaskOptionsComponent } from '../task-options/task-options.component';
 
+import { PriorityTagComponent } from '../reusable/priority-tag/priority-tag.component';
+import { Event } from '@angular/router';
+
 @Component({
   selector: 'app-task',
-  imports: [EditTaskModalComponent, TaskOptionsComponent],
+  imports: [
+    NgClass,
+    DatePipe,
+    EditTaskModalComponent,
+    TaskOptionsComponent,
+    PriorityTagComponent,
+  ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })
@@ -25,23 +38,42 @@ export class TaskComponent {
 
   taskOptionsOpen: boolean = false;
 
-  // toggles temporarily
   openTaskOptions() {
     this.taskOptionsOpen = !this.taskOptionsOpen;
   }
 
-  openEditTaskModal() {
+  testToggle = signal(false);
+
+  taskToggleComplete(e: MouseEvent) {
+    e.stopPropagation();
+
+    const updatedTask: Task = {
+      ...this.task,
+      isComplete: !this.task.isComplete,
+    };
+
+    this.appService.editTask(updatedTask, this.colId, this.taskIdx);
+    this.testToggle.update((testToggle) => !testToggle);
+  }
+
+  openEditTaskModal(e: MouseEvent) {
+    e.stopPropagation();
+
     this.taskOptionsOpen = false;
     this._matDialog.open(EditTaskModalComponent, {
       data: { task: this.task, colId: this.colId, taskIdx: this.taskIdx },
-      panelClass: 'dialogContainer',
+      panelClass: 'sideDialog',
+      position: { right: '0' },
     });
   }
 
   deleteTask() {
-    console.log('delete test');
     this.taskOptionsOpen = false;
 
     this.appService.deleteTask(this.colId, this.task.id);
+  }
+
+  ngOnInit() {
+    // this.openEditTaskModal();
   }
 }

@@ -1,28 +1,26 @@
 <app-page-container>
-  <div class="contentContainer">
-    <app-header-justify-between>
-      <h2>Your boards</h2>
+  <app-header-justify-between>
+    <h2>Your boards</h2>
 
-      <a routerLink="/create-board" class="mainBtn">Create Board</a>
-    </app-header-justify-between>
+    <a routerLink="/create-board" class="mainBtn">Create Board</a>
+  </app-header-justify-between>
 
-    <div class="boardsContainer">
-      @for(board of boards(); track board.id) {
+  <div class="boardsContainer">
+    @for(board of boards; track board.id) {
 
-      <div
-        class="boardLink"
-        [routerLink]="['/boards', `${board.id}`]"
-        (click)="this.appService.setSelectedId(board.id)"
-      >
-        <div class="boardSnapshot">
-          <!-- have screenshot of board like figma -->
-        </div>
-        <p class="boardName">{{ board.name }}</p>
-
-        <p class="boardDate">06-20-2025</p>
+    <div
+      class="boardLink"
+      [routerLink]="['/boards', `${board.id}`]"
+      (click)="this.appService.setSelectedId(board.id)"
+    >
+      <div class="boardSnapshot">
+        <!-- have screenshot of board like figma -->
       </div>
+      <p class="boardName">{{ board.name }}</p>
 
-      }
+      <p class="boardDate">{{ board.date | date : "shortDate" }}</p>
     </div>
+
+    }
   </div>
 </app-page-container>

@@ -1,0 +1,32 @@
+<header>
+  <span class="material-symbols-outlined"> close </span>
+</header>
+
+<div>
+  <h2>TASKNAME</h2>
+  <div class="taskPriority">High</div>
+
+  <p>Complete by: TASK DATE</p>
+</div>
+
+<form>
+  <div class="labelInputContainer">
+    <label for="tasknameInput">TASKNAME</label>
+    <div>
+      <input
+        type="text"
+        name="tasknameInput"
+        id="tasknameInput"
+        [disabled]="inputFieldDisabled()"
+      />
+      <span class="material-symbols-outlined"> edit </span>
+    </div>
+  </div>
+</form>
+
+<!-- 
+    have input fields disbaled by default with task data
+    users can click pencil icon next to input to edit field
+
+    should also have delete task option
+-->

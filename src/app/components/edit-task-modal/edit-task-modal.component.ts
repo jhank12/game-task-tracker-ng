@@ -1,5 +1,11 @@
 import { Component, inject, Input, Inject } from '@angular/core';
 
+import { NgClass } from '@angular/common';
+
+import { DatePipe } from '@angular/common';
+
+import { HeaderJustifyBetweenComponent } from '../reusable/header-justify-between/header-justify-between.component';
+
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -12,6 +18,8 @@ import {
   MatDialog,
 } from '@angular/material/dialog';
 
+import { PriorityTagComponent } from '../reusable/priority-tag/priority-tag.component';
+
 import { AppService } from '../../app.service';
 import { Task } from '../../models/models';
 
@@ -23,7 +31,13 @@ interface EditTaskData {
 
 @Component({
   selector: 'app-edit-task-modal',
-  imports: [ReactiveFormsModule],
+  imports: [
+    NgClass,
+    ReactiveFormsModule,
+    HeaderJustifyBetweenComponent,
+    PriorityTagComponent,
+    DatePipe,
+  ],
   templateUrl: './edit-task-modal.component.html',
   styleUrl: './edit-task-modal.component.scss',
 })
@@ -39,6 +53,7 @@ export class EditTaskModalComponent {
   @Input() editTaskForm = new FormGroup({
     updatedTaskName: new FormControl<string>(''),
     updatedPrioritySelect: new FormControl<string>(''),
+    updatedTargetDate: new FormControl<Date>(new Date()),
   });
 
   closeModal() {
@@ -46,16 +61,27 @@ export class EditTaskModalComponent {
   }
 
   submitEditTask() {
-    const { updatedTaskName: taskName, updatedPrioritySelect: priority } =
-      this.editTaskForm.value;
+    const {
+      updatedTaskName: taskName,
+      updatedPrioritySelect: priority,
+      updatedTargetDate,
+    } = this.editTaskForm.value;
 
     // variable of the passed in task in data
     const task: Task = this.data.task;
 
-    const { taskName: currentName, priority: currentPriority } = task;
+    const {
+      taskName: currentName,
+      priority: currentPriority,
+      date: currentDate,
+    } = task;
 
     // checks dont work
-    if (taskName !== currentName || priority !== currentPriority) {
+    if (
+      taskName !== currentName ||
+      priority !== currentPriority ||
+      updatedTargetDate !== currentDate
+    ) {
       if (
         taskName !== undefined &&
         taskName !== null &&
@@ -66,6 +92,8 @@ export class EditTaskModalComponent {
           id: this.data.task.id,
           taskName: taskName,
           priority: priority,
+          date: updatedTargetDate!,
+          isComplete: false,
         };
 
         this.appService.editTask(
@@ -82,10 +110,16 @@ export class EditTaskModalComponent {
     }
   }
 
+  deleteTask(taskId: string) {
+    this.closeModal();
+    this.appService.deleteTask(this.data.colId, taskId);
+  }
+
   ngOnInit() {
     this.editTaskForm.setValue({
       updatedTaskName: this.data.task.taskName,
       updatedPrioritySelect: this.data.task.priority,
+      updatedTargetDate: this.data.task.date,
     });
   }
 }

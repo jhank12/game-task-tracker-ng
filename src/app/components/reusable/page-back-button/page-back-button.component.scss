@@ -1,0 +1,9 @@
+.pageBackButton {
+  align-items: center;
+  color: var(--purple);
+  display: flex;
+
+  &:hover {
+    color: var(--purple-hover);
+  }
+}

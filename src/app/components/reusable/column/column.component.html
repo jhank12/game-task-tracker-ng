@@ -1,0 +1,36 @@
+<div class="column">
+  <header class="columnHeader">
+    <p class="columnName">
+      {{ column.colName }}
+    </p>
+
+    <div class="columnActions">
+      <button class="actionBtn" (click)="openAddTaskModal(column.id)">
+        <span class="material-symbols-outlined"> add </span>
+      </button>
+
+      <button class="actionBtn">
+        <span class="material-symbols-outlined"> more_vert </span>
+      </button>
+
+      <button class="actionBtn" (click)="toggleColumnExpanded()">
+        <span class="material-symbols-outlined">
+          {{ columnExpanded() ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
+        </span>
+      </button>
+    </div>
+
+    <button (click)="deleteColumn(column.id)">Delete Column</button>
+  </header>
+
+  @if(column.tasks !== undefined && column.tasks.length > 0 && columnExpanded())
+  {
+
+  <div class="tasksContainer">
+    @for(task of column.tasks; track task.id; let idx = $index) {
+    <app-task [task]="task" [colId]="column.id" [taskIdx]="idx" />
+
+    }
+  </div>
+  }
+</div>

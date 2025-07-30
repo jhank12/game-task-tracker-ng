@@ -42,7 +42,7 @@ export class AppComponent {
   }
 
   get boards() {
-    return this.appService.projectBoards;
+    return this.appService.projectBoards();
   }
 
   constructor(private _matDialog: MatDialog) {}

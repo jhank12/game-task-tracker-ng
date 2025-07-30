@@ -1,0 +1,36 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  left: 50%;
+  position: absolute;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .formActions {
+    align-self: flex-end;
+    display: flex;
+    gap: 1rem;
+
+    .cancelBtn {
+      background-color: transparent;
+      color: var(--font-gray);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--font-gray-hover);
+      }
+    }
+  }
+}

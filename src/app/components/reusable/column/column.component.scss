@@ -1,0 +1,40 @@
+.column {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.45rem;
+  height: fit-content;
+
+  // width: 350px;
+  max-width: 500px;
+
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .columnsActions {
+      z-index: 5;
+    }
+  }
+
+  .columnName {
+    color: var(--font-secondary);
+    text-overflow: ellipsis;
+  }
+
+  .tasksCount {
+    color: var(--font-secondary);
+  }
+
+  .columnActions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .tasksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+}

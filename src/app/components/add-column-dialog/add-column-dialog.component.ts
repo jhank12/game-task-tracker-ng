@@ -35,12 +35,6 @@ import { LabelInputComponent } from '../reusable/label-input/label-input.compone
   styleUrl: './add-column-dialog.component.scss',
 })
 export class AddColumnDialogComponent {
-  // @Input() close = new EventEmitter();
-  // @Input() open = new EventEmitter();
-
-  // @ViewChild('createColumnDialog')
-  // createColumnDialog!: ElementRef<HTMLDialogElement>;
-
   appService = inject(AppService);
 
   constructor(private _matDialog: MatDialog) {}
@@ -84,6 +78,7 @@ export class AddColumnDialogComponent {
       priority: new FormControl<'High' | 'Medium' | 'Low'>('High', {
         validators: [Validators.required],
       }),
+      targetDate: new FormControl<Date | null>(null),
     });
     this.tasks.push(newTaskGroup);
   }
@@ -102,11 +97,13 @@ export class AddColumnDialogComponent {
 
       // add ids to tasks
       const updatedTasks: Task[] | undefined = tasks?.map((task) => {
-        const { taskname, priority } = task;
+        const { taskname, priority, targetDate } = task;
         const updatedTask: Task = {
           id: uuid(),
           taskName: taskname,
           priority: priority,
+          date: targetDate,
+          isComplete: false,
         };
         return updatedTask;
       });
@@ -116,7 +113,6 @@ export class AddColumnDialogComponent {
           id: uuid(),
           colName: columnName,
           tasks: updatedTasks,
-          PLACEHOLDERCOUNT: tasks?.length,
         };
 
         this.appService.addColumn(newColumnObj);
@@ -127,8 +123,4 @@ export class AddColumnDialogComponent {
       alert('invalid form');
     }
   }
-
-  // closeModal() {
-  //   this.close.emit();
-  // }
 }

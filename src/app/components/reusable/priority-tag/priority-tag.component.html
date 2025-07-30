@@ -1,0 +1,10 @@
+<div class="priorityActionsContainer">
+  <!-- <div [ngClass]="`priorityTag ${taskPriority.toLocaleLowerCase()}-priority`">
+    <p>{{ taskPriority }}</p>
+  </div> -->
+  <div
+    [ngClass]="taskPriority == 'Completed' ? 'priorityTag complete'  : `priorityTag ${taskPriority.toLocaleLowerCase()}-priority`"
+  >
+    <p>{{ taskPriority }}</p>
+  </div>
+</div>

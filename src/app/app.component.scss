@@ -145,18 +145,3 @@ div.siteContainer {
     color: var(--font-gray-hover);
   }
 }
-
-.actionBtn {
-  align-items: center;
-  background-color: transparent !important;
-  border-radius: 50px;
-  color: var(--font-gray);
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  padding: 2px;
-
-  &:hover {
-    color: var(--font-gray-hover);
-  }
-}

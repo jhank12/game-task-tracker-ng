@@ -46,6 +46,13 @@
           <option value="Low">Low</option>
         </select>
 
+        <input
+          type="date"
+          name="targetDate"
+          id="targetDate"
+          formControlName="targetDate"
+        />
+
         <button class="removeTaskBtn" (click)="deleteTask($index)">
           <span class="material-symbols-outlined"> remove </span>
         </button>

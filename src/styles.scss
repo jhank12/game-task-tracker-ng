@@ -25,9 +25,15 @@
   --font-red: #ff4d4d;
   --font-green: #64ec42;
 
+  --purple: #7364e5;
+  --purple-hover: #7666ed;
+
   --priority-high: #ff4d4d;
   --priority-medium: #ffb342;
   --priority-low: #4dff65;
+
+  --complete: rgb(80, 217, 255);
+  --complete-opacity: rgba(80, 217, 255, 0.25);
 
   --border-radius: 15px;
   --scale-hover: 1.01;
@@ -62,16 +68,51 @@ button {
 input,
 select {
   background-color: var(--bg-secondary);
-  border-radius: 8px;
+  border-radius: 3px;
   border: none;
   color: var(--font-secondary);
   font-size: 1rem;
+  font: inherit;
   padding-left: 1rem;
   height: 50px;
 }
 
+input[type="date"] {
+  color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  opacity: 0.6;
+  // filter: invert(0.9);
+}
+
 select {
   cursor: pointer;
+}
+
+.actionBtn {
+  align-items: center;
+  background-color: transparent !important;
+  border-radius: 50px;
+  color: var(--font-gray);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+
+  &:hover {
+    color: var(--font-gray-hover);
+  }
+}
+
+.icon {
+  background-color: transparent !important;
+  color: var(--font-gray);
+  cursor: pointer;
+  padding: 2px;
 }
 
 .closeIcon {
@@ -87,18 +128,28 @@ select {
 
 .mainBtn {
   align-items: center;
-  background-color: var(--font-main);
+  background-color: var(--purple);
   border-radius: var(--bg-radius);
-  color: black;
+  color: var(--font-main);
   cursor: pointer;
   display: flex;
-  height: 50px;
   font-size: 0.95rem;
+  height: 50px;
+  justify-content: center;
   padding: 0 0.85rem;
 
   &:hover {
-    background-color: var(--font-main-hover) !important;
+    background-color: var(--purple-hover) !important;
   }
+}
+
+.deleteBtn {
+  background-color: var(--font-red);
+  border-radius: var(--bg-radius);
+
+  color: var(--font-main);
+  height: 50px;
+  font-size: 0.95rem;
 }
 
 .dialogContainer {
@@ -153,8 +204,65 @@ select {
   }
 }
 
+.justifybetween {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sideDialog {
+  background-color: var(--bg-main) !important;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  right: 0 !important;
+  width: 450px;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  // form {
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: 3rem;
+  //   margin-top: 2rem;
+  // }
+
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 2rem;
+
+    button {
+      background-color: var(--font-main);
+      align-items: center;
+      background-color: transparent !important;
+      border-radius: 50px;
+      color: var(--font-gray);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      padding: 2px;
+
+      &:hover {
+        color: var(--font-gray-hover);
+      }
+    }
+  }
+
+  form {
+    background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+}
+
 .mat-mdc-dialog-container {
-  //   border-radius: 0 !important;
   --mdc-dialog-container-color: transparent;
   padding: 2rem;
 }
@@ -168,6 +276,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  font-size: 0.9rem;
 
   label {
     color: var(--font-gray);
@@ -175,7 +284,8 @@ select {
 
   input {
     background-color: var(--bg-secondary) !important;
-    border-radius: 8px !important;
+    border-radius: 3px !important;
     height: 50px !important;
+    font-size: 0.95rem;
   }
 }

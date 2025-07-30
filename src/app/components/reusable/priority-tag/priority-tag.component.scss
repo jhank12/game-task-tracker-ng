@@ -1,0 +1,36 @@
+.priorityActionsContainer {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.priorityTag {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 6px 15px;
+
+  p {
+    font-size: 0.9rem;
+    z-index: 10;
+  }
+}
+
+.high-priority {
+  background-color: rgba(255, 77, 77, 0.25);
+  color: var(--priority-high);
+}
+
+.medium-priority {
+  background-color: rgba(255, 179, 66, 0.25);
+  color: var(--priority-medium);
+}
+
+.low-priority {
+  background-color: rgba(77, 255, 101, 0.25);
+  color: var(--priority-low);
+}
+
+.complete {
+  background-color: var(--complete-opacity);
+  color: var(--complete);
+}

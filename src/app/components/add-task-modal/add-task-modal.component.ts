@@ -32,6 +32,7 @@ export class AddTaskModalComponent {
   @Input() newTaskForm = new FormGroup({
     taskName: new FormControl('', { validators: [Validators.required] }),
     priority: new FormControl<'High' | 'Medium' | 'Low'>('High'),
+    targetDate: new FormControl<Date | null>(null),
   });
 
   constructor(
@@ -46,6 +47,24 @@ export class AddTaskModalComponent {
     );
   }
 
+  // for when the date isnt selected and it uses new Date() to give date
+  // formats new Date() to match date picker format(YYYY-MM-DD)
+  formatDate() {
+    const date = new Date();
+
+    let month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const day = date.getDate();
+
+    if (month < 10) {
+      month = Number(`0${month}`);
+    }
+
+    const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day}`;
+
+    return formattedDate;
+  }
+
   closeModal() {
     this._matDialog.closeAll();
   }
@@ -54,13 +73,15 @@ export class AddTaskModalComponent {
     // console.log(this.data.colId);
 
     if (this.newTaskForm.valid) {
-      const { taskName, priority } = this.newTaskForm.value;
+      const { taskName, priority, targetDate } = this.newTaskForm.value;
 
       if (taskName !== undefined && priority !== undefined) {
         const newTask: Task = {
           id: uuid(),
           taskName: taskName!,
           priority: priority!,
+          date: targetDate!,
+          isComplete: false,
         };
         this.appService.addTask(newTask, this.data);
         this.closeModal();
@@ -68,5 +89,9 @@ export class AddTaskModalComponent {
     } else {
       alert('invalid inputs');
     }
+  }
+
+  ngOnInit() {
+    this.formatDate();
   }
 }

@@ -46,7 +46,7 @@ export class AddBoardDialogComponent {
         columnsArr: columns,
       };
 
-      this.appService.addBoard(newBoardObj);
+      // this.appService.addBoard(newBoardObj);
     }
   }
 

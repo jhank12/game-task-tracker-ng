@@ -18,6 +18,28 @@
       [formControl]="newTaskForm.controls.taskName"
     />
   </div>
+
+  <div class="labelInputContainer">
+    <select
+      name="prioritySelect"
+      id="prioritySelect"
+      [formControl]="newTaskForm.controls.priority"
+    >
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+  </div>
+
+  <div class="labelInputContainer">
+    <input
+      type="date"
+      id="targetDate"
+      name="targetDate"
+      [formControl]="newTaskForm.controls.targetDate"
+      value="now"
+    />
+  </div>
   <button class="mainBtn" (click)="submitNewTask()">Add Task</button>
 </form>
 <!-- </div> -->

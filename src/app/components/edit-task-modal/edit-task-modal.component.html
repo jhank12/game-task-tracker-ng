@@ -1,15 +1,30 @@
 <header>
-  <h2>Edit Task</h2>
   <button class="actionBtn" (click)="closeModal()">
-    <span class="material-symbols-outlined closeIcon" mat-dialog-close>
-      close
-    </span>
+    <span class="material-symbols-outlined icon closeIcon"> close </span>
   </button>
 </header>
+
+<div class="taskDetails">
+  <div>
+    <h2>{{ data.task.taskName }}</h2>
+    <app-priority-tag
+      [taskPriority]="data.task.isComplete ? 'Completed' : data.task.priority"
+    />
+
+    <!-- <app-priority-tag [taskPriority]="'Completed'" /> -->
+  </div>
+
+  @if(data.task.date) {
+  <p class="targetDate">
+    Complete by: {{ data.task.date | date : "shortDate" }}
+  </p>
+  }
+</div>
 
 <form [formGroup]="editTaskForm">
   <div class="labelInputContainer">
     <label for="updatedTaskName">Taskname</label>
+
     <input
       type="text"
       id="updatedTaskName"
@@ -31,5 +46,18 @@
     </select>
   </div>
 
-  <button class="mainBtn" (click)="submitEditTask()">Submit</button>
+  <div class="labelInputContainer">
+    <label for="updatedTargetDate">Target Date</label>
+
+    <input
+      type="date"
+      id="updatedTargetDate"
+      name="updatedTargetDate"
+      formControlName="updatedTargetDate"
+    />
+  </div>
+
+  <!-- conditionally render. if changes are made show button -->
+  <button class="mainBtn" (click)="submitEditTask()">Update</button>
+  <button class="deleteBtn" (click)="deleteTask(data.task.id)">Delete</button>
 </form>

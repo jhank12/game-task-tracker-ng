@@ -40,6 +40,7 @@ export class EditBoardModalComponent {
         id: this.data.id,
         name: updatedBoardName,
         columnsArr: this.data.columnsArr,
+        date: this.data.date,
       };
       this.appService.editBoard(updatedBoard);
       this.closeModal();

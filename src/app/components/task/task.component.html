@@ -1,19 +1,32 @@
-<div class="task">
-  <p>{{ task.taskName }}</p>
+<div class="task" (click)="openEditTaskModal($event)">
+  <div class="justifybetween">
+    <div class="taskTextAndIcon">
+      <button class="actionBtn" (click)="taskToggleComplete($event)">
+        <span class="material-symbols-outlined icon completeIcon"
+          >{{
+            task.isComplete ? "radio_button_checked" : "radio_button_unchecked"
+          }}
+        </span>
+      </button>
 
-  <div class="priorityActionsContainer">
-    <div [class]="`priorityTag ${task.priority.toLocaleLowerCase()}-priority`">
-      <p>{{ task.priority }}</p>
+      <p [ngClass]="task.isComplete ? 'strikethrough' : ''">
+        {{ task.taskName }}
+      </p>
     </div>
 
-    <button class="ellipsisIcon">
-      <span class="material-symbols-outlined" (click)="openTaskOptions()">
-        more_vert
-      </span>
-    </button>
+    <app-priority-tag [taskPriority]="task.priority" />
+
+    <!-- <app-priority-tag
+      [taskPriority]="task.isComplete ? 'Completed' : task.priority"
+    /> -->
   </div>
 
-  @if(taskOptionsOpen) {
-  <app-task-options (open)="openEditTaskModal()" (delete)="deleteTask()" />
+  @if(task.date) {
+
+  <div class="completeBy">
+    <span class="material-symbols-outlined icon"> calendar_today </span>
+
+    {{ task.date | date }}
+  </div>
   }
 </div>

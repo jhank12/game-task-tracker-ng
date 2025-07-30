@@ -10,52 +10,63 @@ import { ProjectBoard, Column, Task } from './models/models';
   providedIn: 'root',
 })
 export class AppService {
-  constructor() {}
+  constructor() {
+    this.loadBoards();
+  }
 
-  projectBoards = signal<ProjectBoard[]>([
-    {
-      id: '1',
-      name: 'board1',
-      columnsArr: [
-        {
-          id: uuid(),
-          colName: 'Art',
-          PLACEHOLDERCOUNT: 5,
-          tasks: [
-            { id: uuid(), taskName: 'Health Bar UI', priority: 'High' },
-            { id: uuid(), taskName: 'Enemy UI', priority: 'Medium' },
-            { id: uuid(), taskName: 'Health Bar UI', priority: 'Low' },
-          ],
-        },
-        { id: uuid(), colName: 'Programming', PLACEHOLDERCOUNT: 3, tasks: [] },
-      ],
-    },
-    {
-      id: '2',
-      name: 'board2',
-      columnsArr: [
-        {
-          id: uuid(),
-          colName: 'UI',
-          PLACEHOLDERCOUNT: 5,
-          tasks: [{ id: uuid(), taskName: 'Player UI', priority: 'High' }],
-        },
-        { id: uuid(), colName: 'Design', PLACEHOLDERCOUNT: 3, tasks: [] },
-      ],
-    },
-  ]);
+  projectBoards = signal<ProjectBoard[]>([]);
+
+  loadBoards() {
+    const data = localStorage.getItem('projects');
+
+    if (data) {
+      this.projectBoards.set(JSON.parse(data));
+    }
+  }
+
+  clearStorage() {
+    localStorage.clear();
+  }
 
   selectedId = signal<string>(this.projectBoards()[0]?.id);
 
+  selectedProjectBoard = computed(() => {
+    return this.projectBoards()?.filter((board) => {
+      return board.id == String(this.selectedId());
+    })[0];
+  });
+
+  deleteColumn(colId: string) {
+    const projectBoardsCopy: ProjectBoard[] = [...this.projectBoards()];
+
+    const boardIdx: number = projectBoardsCopy.findIndex(
+      (board) => board.id === this.selectedId()
+    );
+
+    const currentBoard: ProjectBoard = projectBoardsCopy[boardIdx];
+
+    const filteredColumns: Column[] = currentBoard.columnsArr?.filter((col) => {
+      return col.id !== colId;
+    })!;
+
+    currentBoard.columnsArr = filteredColumns;
+
+    localStorage.setItem('projects', JSON.stringify(projectBoardsCopy));
+    this.projectBoards.set(projectBoardsCopy);
+  }
+
   addBoard(newBoard: ProjectBoard) {
     if (this.projectBoards().length > 0) {
+      localStorage.setItem(
+        'projects',
+        JSON.stringify([newBoard, ...this.projectBoards()])
+      );
       this.projectBoards.update((boards) => {
-        return [...boards, newBoard];
+        return [newBoard, ...boards];
       });
     } else {
+      localStorage.setItem('projects', JSON.stringify([newBoard]));
       this.projectBoards.set([newBoard]);
-
-      this.selectedId.set(newBoard.id);
     }
   }
 
@@ -71,6 +82,7 @@ export class AppService {
 
     boardsCopy[boardIdx] = updatedBoard;
 
+    localStorage.setItem('projects', JSON.stringify([...boardsCopy]));
     this.projectBoards.set([...boardsCopy]);
   }
 
@@ -80,8 +92,17 @@ export class AppService {
 
     if (prevCols !== undefined && prevCols.length > 0) {
       this.selectedProjectBoard().columnsArr = [...prevCols, newColumn];
+
+      localStorage.setItem(
+        'projects',
+        JSON.stringify([...this.projectBoards()])
+      );
     } else {
       this.selectedProjectBoard().columnsArr = [newColumn];
+      localStorage.setItem(
+        'projects',
+        JSON.stringify([...this.projectBoards()])
+      );
     }
   }
 
@@ -94,6 +115,11 @@ export class AppService {
 
     if (column.tasks !== undefined) {
       column.tasks = [...column.tasks, newTask];
+
+      localStorage.setItem(
+        'projects',
+        JSON.stringify([...this.projectBoards()])
+      );
     }
   }
 
@@ -106,6 +132,11 @@ export class AppService {
 
     if (column.tasks !== undefined) {
       column.tasks[taskIdx] = updatedTask;
+
+      localStorage.setItem(
+        'projects',
+        JSON.stringify([...this.projectBoards()])
+      );
     }
   }
 
@@ -122,16 +153,12 @@ export class AppService {
       }) || [];
 
     column.tasks = filteredTasks;
+
+    localStorage.setItem('projects', JSON.stringify([...this.projectBoards()]));
   }
 
   setSelectedId(boardId: string) {
     console.log(boardId);
     this.selectedId.set(boardId);
   }
-
-  selectedProjectBoard = computed(() => {
-    return this.projectBoards()?.filter((board) => {
-      return board.id == String(this.selectedId());
-    })[0];
-  });
 }

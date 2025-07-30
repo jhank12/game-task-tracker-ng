@@ -1,30 +1,50 @@
 .task {
-  align-items: center;
+  // align-items: center;
   background-color: var(--bg-lighter);
   border-radius: 8px;
   color: var(--font-secondary);
+  cursor: pointer;
   display: flex;
-  justify-content: space-between;
-  height: 75px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  // height: 75px;
+  min-height: 75px;
   padding: 1rem;
   position: relative;
 
-  .priorityActionsContainer {
-    align-items: center;
-    display: flex;
-    gap: 1rem;
+  &:hover {
+    background-color: var(--bg-secondary-hover);
   }
 }
 
-.priorityTag {
-  border: 1px solid;
-  border-radius: 8px;
-  padding: 6px 15px;
+.taskTextAndIcon {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+  position: relative;
 
-  p {
-    font-size: 0.9rem;
-    z-index: 10;
+  .strikethrough {
+    text-decoration: line-through;
+    color: var(--font-gray);
   }
+}
+
+.completeIcon {
+  color: var(--purple);
+
+  &:hover {
+    color: var(--purple-hover);
+  }
+}
+
+.completeBy {
+  align-items: center;
+  color: var(--font-gray);
+  display: flex;
+  gap: 0.3rem;
+  font-size: 0.95rem !important;
 }
 
 .actionBtn {
@@ -40,19 +60,4 @@
   &:hover {
     color: var(--font-gray-hover);
   }
-}
-
-.high-priority {
-  background-color: rgba(255, 77, 77, 0.25);
-  color: var(--priority-high);
-}
-
-.medium-priority {
-  background-color: rgba(255, 179, 66, 0.25);
-  color: var(--priority-medium);
-}
-
-.low-priority {
-  background-color: rgba(77, 255, 101, 0.25);
-  color: var(--priority-low);
 }

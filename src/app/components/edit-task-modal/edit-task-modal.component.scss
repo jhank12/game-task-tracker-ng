@@ -1,0 +1,19 @@
+.taskDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  div {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.targetDate {
+  color: var(--font-gray);
+}
+
+.deleteTask {
+  background-color: var(--priority-high);
+}
