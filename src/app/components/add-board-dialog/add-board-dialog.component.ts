@@ -5,8 +5,11 @@ import {
   FormControl,
   FormArray,
   Validators,
+  NgForm,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+
+import { FormsModule } from '@angular/forms';
 
 import { v4 as uuid } from 'uuid';
 
@@ -19,7 +22,7 @@ import { LabelInputComponent } from '../reusable/label-input/label-input.compone
 
 @Component({
   selector: 'app-add-board-dialog',
-  imports: [LabelInputComponent, ReactiveFormsModule],
+  imports: [LabelInputComponent, ReactiveFormsModule, FormsModule],
   templateUrl: './add-board-dialog.component.html',
   styleUrl: './add-board-dialog.component.scss',
 })
@@ -36,8 +39,10 @@ export class AddBoardDialogComponent {
   // have page where user can select board template
   // like default will be blank then the next one will have three sections for todo, current and completed
 
-  submitNewBoard() {
+  submit(form: NgForm) {
     const { boardName, columns } = this.newBoardForm.value;
+
+    console.log(form);
 
     if (boardName !== undefined && boardName !== null) {
       const newBoardObj = {

@@ -50,7 +50,6 @@ export class AppComponent {
   openModal() {
     this._matDialog.open(AddColumnDialogComponent, {
       panelClass: 'dialogContainer',
-      width: '500px',
     });
   }
 

@@ -5,7 +5,7 @@
   height: fit-content;
 
   // width: 350px;
-  max-width: 500px;
+  max-width: 416px;
 
   header {
     align-items: center;
@@ -29,6 +29,7 @@
   .columnActions {
     display: flex;
     gap: 0.75rem;
+    position: relative;
   }
 
   .tasksContainer {
@@ -36,5 +37,32 @@
     flex-direction: column;
     gap: 1rem;
     margin-top: 1.5rem;
+  }
+}
+
+.columnOptions {
+  background-color: var(--bg-secondary);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: -200px;
+  top: -20px;
+
+  & > * {
+    align-items: center;
+    display: flex;
+    gap: 1.25rem;
+    color: var(--font-gray);
+    cursor: pointer;
+    padding: 1.25rem;
+
+    &:hover {
+      color: var(--font-gray-hover);
+    }
+  }
+
+  button {
+    background-color: transparent;
   }
 }

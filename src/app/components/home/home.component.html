@@ -13,12 +13,19 @@
       [routerLink]="['/boards', `${board.id}`]"
       (click)="this.appService.setSelectedId(board.id)"
     >
-      <div class="boardSnapshot">
-        <!-- have screenshot of board like figma -->
-      </div>
       <p class="boardName">{{ board.name }}</p>
 
-      <p class="boardDate">{{ board.date | date : "shortDate" }}</p>
+      <div class="boardDetails">
+        <div>
+          <p>Date Created: {{ board.date | date : "shortDate" }}</p>
+        </div>
+
+        @if(board.columnsArr) {
+        <div>
+          <p>Tasks: {{ tasksCount(board.columnsArr) }}</p>
+        </div>
+        }
+      </div>
     </div>
 
     }

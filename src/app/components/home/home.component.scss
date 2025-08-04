@@ -1,15 +1,39 @@
 .boardsContainer {
-  display: flex;
+  display: grid;
   gap: 1rem;
+  // flex-wrap: wrap;
+
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
 
   .boardLink {
     background-color: var(--bg-secondary);
+    border-radius: 5px;
     color: var(--font-secondary);
     cursor: pointer;
     padding: 1rem;
 
+    max-width: 250px;
+
     &:hover {
       background-color: var(--bg-secondary-hover);
+    }
+
+    .boardName {
+      font-size: 1.15rem;
+    }
+
+    .boardDetails {
+      color: var(--font-gray);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      margin-top: 1.25rem;
+
+      div {
+        align-items: center;
+        display: flex;
+      }
     }
   }
 }

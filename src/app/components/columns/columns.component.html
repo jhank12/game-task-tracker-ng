@@ -8,41 +8,6 @@
 
   <app-column [column]="col" />
 
-  <!-- <div class="column">
-    <header class="columnHeader">
-      <p class="columnName">
-        {{ col.colName }}
-      </p>
-
-      <div class="columnActions">
-        <button class="actionBtn" (click)="openAddTaskModal(col.id)">
-          <span class="material-symbols-outlined"> add </span>
-        </button>
-
-        <button class="actionBtn">
-          <span class="material-symbols-outlined"> more_vert </span>
-        </button>
-
-        <button class="actionBtn" (click)="toggleColumnExpanded()">
-          <span class="material-symbols-outlined">
-            {{ columnExpanded() ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
-          </span>
-        </button>
-      </div>
-
-      <button (click)="deleteColumn(col.id)">Delete Column</button>
-    </header>
-
-    @if(col.tasks !== undefined && col.tasks.length > 0 && columnExpanded()) {
-
-    <div class="tasksContainer">
-      @for(task of col.tasks; track task.id; let idx = $index) {
-      <app-task [task]="task" [colId]="col.id" [taskIdx]="idx" />
-
-      }
-    </div>
-    }
-  </div> -->
   } } @else {
   <p>You have no task columns.</p>
   }

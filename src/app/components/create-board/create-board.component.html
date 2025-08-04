@@ -4,20 +4,24 @@
   <div class="content">
     <h1>New Project Details</h1>
 
-    <form>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
       <div class="labelInputContainer">
         <label for="projectName">Project Name</label>
         <input
           type="text"
           id="projectName"
           name="projectName"
-          [(ngModel)]="projectName"
+          ngModel
+          #nameInput="ngModel"
+          required
         />
       </div>
 
       <div class="formActions">
         <button class="cancelBtn" routerLink="/">Cancel</button>
-        <button class="mainBtn" (click)="onSubmit()">Create</button>
+        <button class="mainBtn formSubmitBtn" [disabled]="!nameInput.valid">
+          Create
+        </button>
       </div>
     </form>
   </div>

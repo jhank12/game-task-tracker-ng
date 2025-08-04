@@ -2,9 +2,9 @@ import { v4 as uuid } from 'uuid';
 
 import { Component, inject } from '@angular/core';
 
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
-import { FormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, NgForm } from '@angular/forms';
 import { AppService } from '../../app.service';
 
 import { PageContainerComponent } from '../reusable/page-container/page-container.component';
@@ -27,17 +27,21 @@ import { ProjectBoard } from '../../models/models';
 export class CreateBoardComponent {
   appService = inject(AppService);
 
-  projectName: string = '';
-  date: Date = new Date();
+  constructor(private router: Router) {}
 
-  onSubmit() {
+  // projectName: string = '';
+  // date: Date = new Date();
+
+  onSubmit(form: NgForm) {
     const newBoard: ProjectBoard = {
       id: uuid(),
-      name: this.projectName,
+      name: form.value.projectName,
       columnsArr: [],
       date: new Date(),
     };
 
     this.appService.addBoard(newBoard);
+
+    this.router.navigate(['/']);
   }
 }

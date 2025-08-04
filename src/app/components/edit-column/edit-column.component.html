@@ -1,0 +1,35 @@
+<header>
+  <h2>
+    {{ data.colName }}
+  </h2>
+  <button class="actionBtn" (click)="closeModal()">
+    <span class="material-symbols-outlined icon closeIcon"> close </span>
+  </button>
+</header>
+
+<form #form="ngForm" (ngSubmit)="editColumn()">
+  <div class="labelInputContainer">
+    <label for="updatedName">Column Name</label>
+
+    <input
+      type="text"
+      id="updatedName"
+      name="updatedName"
+      required
+      [(ngModel)]="updatedName"
+      #nameInput="ngModel"
+    />
+  </div>
+
+  <div class="btnsContainer">
+    <button
+      class="mainBtn deleteBtn"
+      [disabled]="nameInput.invalid || !nameInput.dirty"
+    >
+      Update Column
+    </button>
+    <button class="mainBtn deleteBtn" (click)="deleteColumn()">
+      Delete Column
+    </button>
+  </div>
+</form>

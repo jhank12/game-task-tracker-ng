@@ -93,7 +93,7 @@ export class EditTaskModalComponent {
           taskName: taskName,
           priority: priority,
           date: updatedTargetDate!,
-          isComplete: false,
+          isComplete: task.isComplete,
         };
 
         this.appService.editTask(

@@ -8,6 +8,7 @@ import { AppService } from '../../app.service';
 
 import { HeaderJustifyBetweenComponent } from '../reusable/header-justify-between/header-justify-between.component';
 import { PageContainerComponent } from '../reusable/page-container/page-container.component';
+import { Column, Task } from '../../models/models';
 
 @Component({
   selector: 'app-home',
@@ -25,5 +26,17 @@ export class HomeComponent {
 
   get boards() {
     return this.appService.projectBoards();
+  }
+
+  tasksCount(columnsArr: Column[]): number {
+    let sum = 0;
+
+    columnsArr.forEach((col) => {
+      if (col.tasks == null) return;
+
+      sum += col.tasks.length;
+    });
+
+    return sum;
   }
 }

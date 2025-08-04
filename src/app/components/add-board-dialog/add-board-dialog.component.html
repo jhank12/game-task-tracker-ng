@@ -6,7 +6,7 @@
   </button>
 </header>
 
-<form [formGroup]="newBoardForm">
+<form #form="ngForm" (ngSubmit)="submit(form)">
   <app-label-input>
     <label for="boardNameInput">Board Name</label>
     <input
@@ -16,5 +16,5 @@
     />
   </app-label-input>
 
-  <button class="mainBtn" (click)="submitNewBoard()">Create Board</button>
+  <button class="mainBtn">Create Board</button>
 </form>
