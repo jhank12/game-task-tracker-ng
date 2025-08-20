@@ -21,7 +21,7 @@
   }
 </div>
 
-<form [formGroup]="editTaskForm">
+<form [formGroup]="editTaskForm" (ngSubmit)="submitEditTask()">
   <div class="labelInputContainer">
     <label for="updatedTaskName">Taskname</label>
 
@@ -57,7 +57,8 @@
     />
   </div>
 
-  <!-- conditionally render. if changes are made show button -->
-  <button class="mainBtn" (click)="submitEditTask()">Update</button>
-  <button class="deleteBtn" (click)="deleteTask(data.task.id)">Delete</button>
+  <button class="mainBtn" [disabled]="!editTaskForm.valid || !hasChanges">
+    Update
+  </button>
+  <button class="deleteBtn" (click)="deleteTask()" type="button">Delete</button>
 </form>

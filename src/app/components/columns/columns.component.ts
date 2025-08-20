@@ -12,6 +12,8 @@ import { TaskComponent } from '../task/task.component';
 import { AddTaskModalComponent } from '../add-task-modal/add-task-modal.component';
 import { ColumnComponent } from '../reusable/column/column.component';
 
+import { ColumnsTableViewComponent } from '../columns-table-view/columns-table-view.component';
+
 @Component({
   selector: 'app-columns',
   imports: [
@@ -20,6 +22,7 @@ import { ColumnComponent } from '../reusable/column/column.component';
     AddTaskModalComponent,
     ColumnComponent,
     MatDialogActions,
+    ColumnsTableViewComponent,
   ],
   templateUrl: './columns.component.html',
   styleUrl: './columns.component.scss',
@@ -27,5 +30,11 @@ import { ColumnComponent } from '../reusable/column/column.component';
 export class ColumnsComponent {
   appService = inject(AppService);
 
+  @Input({ required: true }) selectedTab!: string;
   @Input({ required: true }) columns!: Column[];
+
+
+  // get columnsTest() {
+  //   return this.appService.selectedProjectBoard().columnsArr
+  // }
 }

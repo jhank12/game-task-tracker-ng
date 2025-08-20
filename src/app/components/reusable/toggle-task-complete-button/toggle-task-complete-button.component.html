@@ -1,0 +1,7 @@
+<button class="actionBtn" (click)="taskToggleComplete($event)">
+  @if(task.isComplete) {
+  <span class="material-symbols-outlined icon completeIcon"> check_box </span>
+  } @else {
+  <span class="material-symbols-outlined icon"> check_box_outline_blank </span>
+  }
+</button>

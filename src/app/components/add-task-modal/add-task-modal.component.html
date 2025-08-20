@@ -8,7 +8,7 @@
   <!-- </mat-dialog-actions> -->
 </header>
 
-<form [formGroup]="newTaskForm">
+<form [formGroup]="newTaskForm" (ngSubmit)="submitNewTask()">
   <div class="labelInputContainer">
     <label for="taskName">Task Name</label>
     <input
@@ -40,6 +40,6 @@
       value="now"
     />
   </div>
-  <button class="mainBtn" (click)="submitNewTask()">Add Task</button>
+  <button class="mainBtn" [disabled]="!newTaskForm.valid">Add Task</button>
 </form>
 <!-- </div> -->

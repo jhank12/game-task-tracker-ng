@@ -1,13 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-import {
-  Component,
-  EventEmitter,
-  Input,
-  ElementRef,
-  ViewChild,
-  inject,
-} from '@angular/core';
+import { Component, Input, ElementRef, inject } from '@angular/core';
 
 import {
   ReactiveFormsModule,
@@ -17,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AppService } from '../../app.service';
 
@@ -26,11 +19,9 @@ import { Column, Task } from '../../models/models';
 import { DialogComponent } from '../reusable/dialog/dialog.component';
 import { LabelInputComponent } from '../reusable/label-input/label-input.component';
 
-// emit the dialog element ref from here and pass in showmodal function
-
 @Component({
   selector: 'app-add-column-dialog',
-  imports: [ReactiveFormsModule, DialogComponent, LabelInputComponent],
+  imports: [ReactiveFormsModule, LabelInputComponent],
   templateUrl: './add-column-dialog.component.html',
   styleUrl: './add-column-dialog.component.scss',
 })
@@ -85,10 +76,7 @@ export class AddColumnDialogComponent {
 
   // for add column modal only
   deleteTask(index: number) {
-    // console.log(this.tasks);
     this.tasks.removeAt(index);
-
-    console.log(this.tasks.controls);
   }
 
   submitNewColumn() {

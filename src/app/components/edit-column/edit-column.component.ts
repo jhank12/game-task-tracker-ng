@@ -1,13 +1,23 @@
 import { Component, Input, Inject, inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { FormsModule, NgForm } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  FormsModule,
+  NgForm,
+  Validator,
+  Validators,
+} from '@angular/forms';
 
 import { MatDialog } from '@angular/material/dialog';
 
 import { AppService } from '../../app.service';
 
 import { Column } from '../../models/models';
+
+import { checkIfSameValue } from '../../shared/validators/checkIfSameValue';
 
 interface EditColumn {
   colId: string;
@@ -16,7 +26,7 @@ interface EditColumn {
 
 @Component({
   selector: 'app-edit-column',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './edit-column.component.html',
   styleUrl: './edit-column.component.scss',
 })
@@ -27,22 +37,21 @@ export class EditColumnComponent {
     @Inject(MAT_DIALOG_DATA)
     public data: Column,
     private _matDialog: MatDialog
-  ) {
-    console.log(this.data);
-  }
+  ) {}
 
-  updatedName: string = '';
+  editColumnForm!: FormGroup;
 
   closeModal() {
     this._matDialog.closeAll();
   }
 
   editColumn() {
+    const { updatedName } = this.editColumnForm.value;
+
     const updatedColumn: Column = {
       ...this.data,
-      colName: this.updatedName,
+      colName: updatedName,
     };
-    // console.log(updatedColumn);
     this.appService.editColumn(updatedColumn);
     this.closeModal();
   }
@@ -50,5 +59,13 @@ export class EditColumnComponent {
   deleteColumn() {
     this.appService.deleteColumn(this.data.id);
     this.closeModal();
+  }
+
+  ngOnInit() {
+    this.editColumnForm = new FormGroup({
+      updatedName: new FormControl<string>(this.data.colName, {
+        validators: [Validators.required, checkIfSameValue(this.data.colName)],
+      }),
+    });
   }
 }

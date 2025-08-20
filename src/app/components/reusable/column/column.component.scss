@@ -4,22 +4,29 @@
   padding: 1.45rem;
   height: fit-content;
 
-  // width: 350px;
-  max-width: 416px;
-
   header {
     align-items: center;
     display: flex;
     justify-content: space-between;
+    text-overflow: ellipsis;
 
     .columnsActions {
       z-index: 5;
     }
   }
 
+  .columnNameDiv {
+    overflow: hidden;
+    width: 60%;
+  }
+
   .columnName {
     color: var(--font-secondary);
+    white-space: nowrap;
     text-overflow: ellipsis;
+
+    overflow: hidden;
+    width: 100%;
   }
 
   .tasksCount {

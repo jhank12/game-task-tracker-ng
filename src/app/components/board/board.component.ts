@@ -1,4 +1,4 @@
-import { Component, input, inject } from '@angular/core';
+import { Component, input, inject, signal } from '@angular/core';
 
 import { PageContainerComponent } from '../reusable/page-container/page-container.component';
 import { AppService } from '../../app.service';
@@ -10,6 +10,12 @@ import { AddColumnDialogComponent } from '../add-column-dialog/add-column-dialog
 import { EditBoardModalComponent } from '../edit-board-modal/edit-board-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 
+import { BoardTabsComponent } from '../board-tabs/board-tabs.component';
+
+import { RouterLink } from '@angular/router';
+
+import { NgClass } from '@angular/common';
+
 @Component({
   selector: 'app-board',
   imports: [
@@ -18,6 +24,9 @@ import { MatDialog } from '@angular/material/dialog';
     ColumnsComponent,
     AddColumnDialogComponent,
     EditBoardModalComponent,
+    RouterLink,
+    NgClass,
+    BoardTabsComponent,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -29,16 +38,21 @@ export class BoardComponent {
 
   constructor(private _matDialog: MatDialog) {}
 
+  selectedTab = 'Kanban';
+
   get board() {
-    return this.appService.projectBoards()?.filter((board) => {
-      return board.id == this.boardId();
-    })[0];
+    return this.appService.selectedProjectBoard();
+  }
+
+  changeSelectedTab(tab: string) {
+    this.selectedTab = tab;
   }
 
   openAddColumnModal() {
     this._matDialog.open(AddColumnDialogComponent, {
       panelClass: 'dialogContainer',
-      width: '500px',
+      width: '600px',
+      height: 'fit-content',
     });
   }
 

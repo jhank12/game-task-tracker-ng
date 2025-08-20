@@ -12,7 +12,7 @@
   </button>
 </header>
 
-<form [formGroup]="newColumnForm">
+<form [formGroup]="newColumnForm" (ngSubmit)="submitNewColumn()">
   <app-label-input>
     <label for="colNameInput">Column Name</label>
     <input
@@ -53,7 +53,11 @@
           formControlName="targetDate"
         />
 
-        <button class="removeTaskBtn" (click)="deleteTask($index)">
+        <button
+          class="removeTaskBtn"
+          type="button"
+          (click)="deleteTask($index)"
+        >
           <span class="material-symbols-outlined"> remove </span>
         </button>
       </div>
@@ -61,7 +65,7 @@
       }
     </div>
 
-    <button class="addTaskBtn" (click)="addTaskToFormArray()">
+    <button class="addTaskBtn" type="button" (click)="addTaskToFormArray()">
       <span class="material-symbols-outlined"> add_circle </span>
       Add Task
     </button>
@@ -69,10 +73,5 @@
 
   }
 
-  <button class="mainBtn" (click)="submitNewColumn()">Add Column</button>
+  <button class="mainBtn" [disabled]="!newColumnForm.valid">Add Column</button>
 </form>
-<!-- </div> -->
-
-<!-- </dialog> -->
-
-<!-- <p>form works</p> -->

@@ -1,0 +1,95 @@
+<div class="columnContainer">
+  <header>
+    <h3>{{ column.colName }}</h3>
+
+    <div class="columnActions">
+      <app-open-task-icon-button colId="{{ column.id }}" />
+
+      <app-column-options-icon-button
+        (toggleOptions)="toggleColumnOptionsOpen()"
+      />
+
+      @if(column.tasks && column.tasks.length > 0) {
+      <app-column-expand-icon-button
+        [columnExpanded]="columnExpanded()"
+        (toggleColumnExpanded)="toggleColumnExpanded()"
+      />
+      }
+    </div>
+  </header>
+
+  @if(columnOptionsOpen()) {
+
+  <div class="columnOptions">
+    <button (click)="openEditColumn()">
+      <span class="material-symbols-outlined"> edit </span>
+      Edit
+    </button>
+
+    <button (click)="deleteColumn(column.id)">
+      <span class="material-symbols-outlined"> delete </span>
+      Delete
+    </button>
+  </div>
+
+  } @if(column.tasks !== undefined && column.tasks.length > 0) {
+  @if(columnExpanded()) {
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Task Name</th>
+        <th>Priority</th>
+        <th>Date</th>
+        <!-- <th>Status</th> -->
+        <!-- <th></th> -->
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for(task of column.tasks; track task.id; let idx = $index) {
+      <tr>
+        <td class="toggleCompleteBtn" align="center">
+          <!-- <button class="actionBtn" (click)="taskToggleComplete($event)"> -->
+
+          <app-toggle-task-complete-button
+            [task]="task"
+            [colId]="column.id"
+            [taskIdx]="idx"
+          />
+        </td>
+        <td [ngClass]="task.isComplete ? 'strikethrough' : ''">
+          {{ task.taskName }}
+        </td>
+
+        <td>
+          <app-priority-tag [taskPriority]="task.priority">
+            {{ task.priority }}
+          </app-priority-tag>
+        </td>
+
+        <td>
+          {{ task.date }}
+        </td>
+
+        <!-- <td>
+          {{ task.isComplete }}
+        </td> -->
+
+        <td>
+          <button>Edit</button>
+        </td>
+
+        <td>
+          <button>Delete</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  } } @else {
+  <p>This Table has no tasks.</p>
+  }
+</div>

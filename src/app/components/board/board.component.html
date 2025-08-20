@@ -13,7 +13,12 @@
 
   @if(board.columnsArr && board.columnsArr.length > 0) {
 
-  <app-columns [columns]="board.columnsArr" />
+  <app-board-tabs
+    [selectedTab]="selectedTab"
+    (setTab)="changeSelectedTab($event)"
+  />
+
+  <app-columns [selectedTab]="selectedTab" [columns]="board.columnsArr" />
   } @else {
 
   <p>no items</p>

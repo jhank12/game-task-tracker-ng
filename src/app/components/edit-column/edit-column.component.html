@@ -1,13 +1,11 @@
 <header>
-  <h2>
-    {{ data.colName }}
-  </h2>
+  <h2>Edit Column</h2>
   <button class="actionBtn" (click)="closeModal()">
     <span class="material-symbols-outlined icon closeIcon"> close </span>
   </button>
 </header>
 
-<form #form="ngForm" (ngSubmit)="editColumn()">
+<form [formGroup]="editColumnForm" (ngSubmit)="editColumn()">
   <div class="labelInputContainer">
     <label for="updatedName">Column Name</label>
 
@@ -16,16 +14,12 @@
       id="updatedName"
       name="updatedName"
       required
-      [(ngModel)]="updatedName"
-      #nameInput="ngModel"
+      formControlName="updatedName"
     />
   </div>
 
   <div class="btnsContainer">
-    <button
-      class="mainBtn deleteBtn"
-      [disabled]="nameInput.invalid || !nameInput.dirty"
-    >
+    <button class="mainBtn deleteBtn" [disabled]="!editColumnForm.valid">
       Update Column
     </button>
     <button class="mainBtn deleteBtn" (click)="deleteColumn()">

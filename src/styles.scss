@@ -49,6 +49,9 @@ body {
   color: var(--font-main);
   font-family: "Helvetica", sans-serif !important;
   height: 100vh;
+  width: 100vw;
+
+  overflow-x: hidden;
 }
 
 // reset styles
@@ -154,6 +157,10 @@ select {
   }
 }
 
+input::placeholder {
+  color: red !important;
+}
+
 .deleteBtn {
   background-color: var(--font-red);
   border-radius: var(--bg-radius);
@@ -171,8 +178,9 @@ select {
   display: flex;
   flex-direction: column;
   position: absolute;
+  // min-width: 400px;
   // width: 25%;
-  width: 600px !important;
+  // width: 600px !important;
 
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.25);
@@ -183,6 +191,7 @@ select {
     flex-direction: column;
     gap: 2rem;
     margin-top: 2rem;
+    width: 100%;
   }
 
   header {
@@ -206,14 +215,6 @@ select {
       }
     }
   }
-
-  form {
-    background-color: transparent !important;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
 }
 
 .justifybetween {
@@ -233,13 +234,6 @@ select {
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.25);
   }
-
-  // form {
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 3rem;
-  //   margin-top: 2rem;
-  // }
 
   header {
     align-items: center;
@@ -282,11 +276,28 @@ select {
 .mat-mdc-dialog-container {
   --mdc-dialog-container-color: transparent;
   padding: 2rem;
+  width: 100%;
 }
 
 .mat-mdc-dialog-surface,
 .mdc-dialog__surface {
   border-radius: 0 !important;
+  width: 100%;
+}
+
+.mat-mdc-dialog-inner-container {
+  max-width: 650px;
+  min-width: 200px !important;
+  // width: 100%;
+}
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+  // max-width: 600px !important;
+  // min-width: 350px !important;
+
+  // width: 20%;
+
+  width: 100%;
 }
 
 .labelInputContainer {

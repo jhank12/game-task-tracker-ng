@@ -1,33 +1,28 @@
 <div class="column">
   <header class="columnHeader">
-    <p class="columnName">
-      {{ column.colName }}
-    </p>
+    <div class="columnNameDiv">
+      <p class="columnName">
+        {{ column.colName }}
+      </p>
+    </div>
 
     <div class="columnActions">
-      <button class="actionBtn" (click)="openAddTaskModal(column.id)">
-        <span class="material-symbols-outlined"> add </span>
-      </button>
+      <app-open-task-icon-button colId="{{ column.id }}" />
 
-      <!-- <button class="actionBtn" (click)="openEditColumn()"> -->
-      <button class="actionBtn" (click)="toggleColumnOptionsOpen()">
-        <span class="material-symbols-outlined"> more_vert </span>
-      </button>
+      <app-column-options-icon-button
+        (toggleOptions)="toggleColumnOptionsOpen()"
+      />
 
       @if(column.tasks && column.tasks.length > 0) {
-      <button class="actionBtn" (click)="toggleColumnExpanded()">
-        <span class="material-symbols-outlined">
-          {{ columnExpanded() ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
-        </span>
-      </button>
+
+      <app-column-expand-icon-button
+        [columnExpanded]="columnExpanded()"
+        (toggleColumnExpanded)="toggleColumnExpanded()"
+      />
+
       } @if(columnOptionsOpen()) {
 
       <div class="columnOptions">
-        <a [routerLink]="['./column', `${column.id}`]">
-          <span class="material-symbols-outlined"> fullscreen </span>
-          Fullscreen</a
-        >
-
         <button (click)="openEditColumn()">
           <span class="material-symbols-outlined"> edit </span>
           Edit
@@ -48,6 +43,7 @@
 
   <div class="tasksContainer">
     @for(task of column.tasks; track task.id; let idx = $index) {
+
     <app-task [task]="task" [colId]="column.id" [taskIdx]="idx" />
 
     }

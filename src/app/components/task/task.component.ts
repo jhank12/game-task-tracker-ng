@@ -15,6 +15,8 @@ import { TaskOptionsComponent } from '../task-options/task-options.component';
 import { PriorityTagComponent } from '../reusable/priority-tag/priority-tag.component';
 import { Event } from '@angular/router';
 
+import { ToggleTaskCompleteButtonComponent } from '../reusable/toggle-task-complete-button/toggle-task-complete-button.component';
+
 @Component({
   selector: 'app-task',
   imports: [
@@ -23,6 +25,7 @@ import { Event } from '@angular/router';
     EditTaskModalComponent,
     TaskOptionsComponent,
     PriorityTagComponent,
+    ToggleTaskCompleteButtonComponent,
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
@@ -63,15 +66,16 @@ export class TaskComponent {
     this._matDialog.open(EditTaskModalComponent, {
       data: { task: this.task, colId: this.colId, taskIdx: this.taskIdx },
       panelClass: 'sideDialog',
+      width: '450px',
       position: { right: '0' },
     });
   }
 
-  deleteTask() {
-    this.taskOptionsOpen = false;
+  // deleteTask() {
+  //   this.taskOptionsOpen = false;
 
-    this.appService.deleteTask(this.colId, this.task.id);
-  }
+  //   this.appService.deleteTask(this.colId, this.task.id);
+  // }
 
   ngOnInit() {
     // this.openEditTaskModal();

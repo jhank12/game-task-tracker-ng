@@ -11,6 +11,8 @@ import {
   ReactiveFormsModule,
   FormGroup,
   FormControl,
+  FormBuilder,
+  Validators,
 } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -23,9 +25,11 @@ import { PriorityTagComponent } from '../reusable/priority-tag/priority-tag.comp
 import { AppService } from '../../app.service';
 import { Task } from '../../models/models';
 
+import { checkIfSameValue } from '../../shared/validators/checkIfSameValue';
+
 interface EditTaskData {
-  colId: string;
   task: Task;
+  colId: string;
   taskIdx: number;
 }
 
@@ -47,79 +51,65 @@ export class EditTaskModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: EditTaskData,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+
+    private fb: FormBuilder
   ) {}
 
-  @Input() editTaskForm = new FormGroup({
-    updatedTaskName: new FormControl<string>(''),
-    updatedPrioritySelect: new FormControl<string>(''),
-    updatedTargetDate: new FormControl<Date>(new Date()),
-  });
+  editTaskForm!: FormGroup;
 
   closeModal() {
     this._matDialog.closeAll();
   }
 
   submitEditTask() {
-    const {
-      updatedTaskName: taskName,
-      updatedPrioritySelect: priority,
-      updatedTargetDate,
-    } = this.editTaskForm.value;
+    const { updatedTaskName, updatedPrioritySelect, updatedTargetDate } =
+      this.editTaskForm.value;
 
-    // variable of the passed in task in data
-    const task: Task = this.data.task;
+    const updatedTask: Task = {
+      id: this.data.task.id,
+      taskName: updatedTaskName,
+      priority: updatedPrioritySelect,
+      date: updatedTargetDate!,
+      isComplete: this.data.task.isComplete,
+    };
 
-    const {
-      taskName: currentName,
-      priority: currentPriority,
-      date: currentDate,
-    } = task;
+    this.appService.editTask(updatedTask, this.data.colId, this.data.taskIdx);
 
-    // checks dont work
-    if (
-      taskName !== currentName ||
-      priority !== currentPriority ||
-      updatedTargetDate !== currentDate
-    ) {
-      if (
-        taskName !== undefined &&
-        taskName !== null &&
-        priority !== undefined &&
-        priority !== null
-      ) {
-        const updatedTask: Task = {
-          id: this.data.task.id,
-          taskName: taskName,
-          priority: priority,
-          date: updatedTargetDate!,
-          isComplete: task.isComplete,
-        };
-
-        this.appService.editTask(
-          updatedTask,
-          this.data.colId,
-          this.data.taskIdx
-        );
-
-        this.closeModal();
-      } else {
-      }
-    } else {
-      alert('No inputs were changed');
-    }
+    this.closeModal();
   }
 
-  deleteTask(taskId: string) {
+  get hasChanges() {
+    const { updatedTaskName, updatedPrioritySelect, updatedTargetDate } =
+      this.editTaskForm.value;
+
+    const newObj: Task = {
+      id: this.data.task.id,
+      taskName: updatedTaskName,
+      priority: updatedPrioritySelect,
+      date: updatedTargetDate,
+      isComplete: this.data.task.isComplete,
+    };
+
+    return JSON.stringify(this.data.task) !== JSON.stringify(newObj);
+  }
+
+  deleteTask() {
+    this.appService.deleteTask(this.data.colId, this.data.task.id);
     this.closeModal();
-    this.appService.deleteTask(this.data.colId, taskId);
   }
 
   ngOnInit() {
-    this.editTaskForm.setValue({
-      updatedTaskName: this.data.task.taskName,
-      updatedPrioritySelect: this.data.task.priority,
-      updatedTargetDate: this.data.task.date,
+    this.editTaskForm = this.fb.group({
+      updatedTaskName: this.fb.control<string>(
+        this.data.task.taskName,
+        Validators.required
+      ),
+      updatedPrioritySelect: this.fb.control<string>(
+        this.data.task.priority,
+        Validators.required
+      ),
+      updatedTargetDate: this.fb.control<Date | null>(this.data.task.date),
     });
   }
 }

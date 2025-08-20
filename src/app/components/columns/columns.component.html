@@ -1,14 +1,18 @@
-<!-- <section class="columnsContainer"> -->
-<section
-  [ngClass]="
-    columns.length > 2 ? 'columnsContainer' : 'columnsContainer-single'
-  "
->
-  @if(columns !== undefined) { @for(col of columns; track col.id) {
+<section class="columns">
+  @if(columns !== undefined) { @if(selectedTab === 'Kanban') {
+  <section
+    [ngClass]="
+      columns.length > 2 ? 'columnsContainer' : 'columnsContainer-single'
+    "
+  >
+    @for(col of columns; track col.id) {
+    <app-column [column]="col" />
 
-  <app-column [column]="col" />
+    }
+  </section>
+  } @if(selectedTab === 'Table') {
 
-  } } @else {
-  <p>You have no task columns.</p>
-  }
+  <app-columns-table-view [columns]="columns" />
+
+  } }
 </section>

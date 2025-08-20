@@ -1,1 +1,11 @@
-<p>column-page works!</p>
+<app-page-container>
+  <header>
+    <h1>{{ column?.colName }}</h1>
+  </header>
+
+  @for(task of column?.tasks; track task.id) {
+  {{ task.taskName }}
+  {{ task.priority }}
+
+  }
+</app-page-container>

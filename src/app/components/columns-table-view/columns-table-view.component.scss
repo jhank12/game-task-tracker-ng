@@ -1,0 +1,86 @@
+.columnsTableViewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h3 {
+    font-size: 1.4rem;
+  }
+}
+
+.columnContainer {
+  background-color: var(--bg-secondary);
+
+  border-radius: 10px;
+  color: var(--font-secondary);
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+
+  header {
+    align-items: center;
+    border-bottom: 2px solid var(--bg-lighter);
+    padding: 0 0 1rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.columnActions {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    text-align: left;
+  }
+
+  tr {
+    height: 70px;
+  }
+
+  td:first-of-type {
+    width: 65px;
+
+    & > button {
+      margin: 0 auto;
+    }
+  }
+
+  tbody {
+    tr {
+      background-color: var(--bg-lighter);
+    }
+
+    tr:first-of-type {
+      td:first-of-type {
+        border-top-left-radius: 8px;
+      }
+
+      td:last-of-type {
+        border-top-right-radius: 8px;
+      }
+    }
+
+    tr:last-of-type {
+      td:first-of-type {
+        border-bottom-left-radius: 8px;
+      }
+
+      td:last-of-type {
+        border-bottom-right-radius: 8px;
+      }
+    }
+  }
+}
+
+.completeIcon {
+  color: var(--purple);
+
+  &:hover {
+    color: var(--purple-hover);
+  }
+}

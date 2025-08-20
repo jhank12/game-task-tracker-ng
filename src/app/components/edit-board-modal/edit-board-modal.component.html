@@ -19,5 +19,12 @@
     />
   </div>
 
-  <button class="mainBtn" (click)="submitEditBoard()">Update</button>
+  <button
+    class="mainBtn"
+    (click)="submitEditBoard()"
+    [disabled]="!editBoardForm.valid"
+  >
+    Update
+  </button>
+  <button class="mainBtn" (click)="deleteBoard()">Delete Board</button>
 </form>

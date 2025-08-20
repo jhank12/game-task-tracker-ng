@@ -1,9 +1,11 @@
+.columns {
+  margin-top: 2rem;
+}
+
 .columnsContainer,
 .columnsContainer-single {
   display: grid;
-  gap: 1.5rem;
-  // min-width: 100vw;
-  // width: fit-content;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
@@ -13,7 +15,7 @@
 }
 
 .columnsContainer-single {
-  // grid-template-columns: repeat(auto-fit, minmax(350px, 475px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
 }
 
 .actionBtn {
@@ -28,5 +30,12 @@
 
   &:hover {
     color: var(--font-gray-hover);
+  }
+}
+
+@media (max-width: 450px) {
+  .columnsContainer,
+  .columnsContainer-single {
+    grid-template-columns: 1fr;
   }
 }

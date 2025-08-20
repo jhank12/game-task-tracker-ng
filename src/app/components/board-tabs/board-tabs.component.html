@@ -1,0 +1,15 @@
+<div class="columnsViewTabs">
+  @for(tab of tabsArr; track tab.tabName) {
+  <button
+    [ngClass]="
+      selectedTab === tab.tabName ? 'columnViewTab selected' : 'columnViewTab'
+    "
+    (click)="setSelectedTab(tab.tabName)"
+  >
+    <span class="material-symbols-outlined"> {{ tab.icon }} </span>
+    {{ tab.tabName }}
+  </button>
+  }
+
+  <hr />
+</div>
