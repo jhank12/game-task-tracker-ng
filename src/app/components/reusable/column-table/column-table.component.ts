@@ -2,6 +2,7 @@ import { Component, Input, signal, inject } from '@angular/core';
 import { Column } from '../../../models/models';
 
 import { EditColumnComponent } from '../../edit-column/edit-column.component';
+import { EditTaskModalComponent } from '../../edit-task-modal/edit-task-modal.component';
 
 import { PriorityTagComponent } from '../priority-tag/priority-tag.component';
 import { OpenTaskIconButtonComponent } from '../open-task-icon-button/open-task-icon-button.component';
@@ -61,4 +62,16 @@ export class ColumnTableComponent {
     this.toggleColumnOptionsOpen();
     this.appService.deleteColumn(colId);
   }
+
+  // openEditTaskModal(e: MouseEvent) {
+  //   e.stopPropagation();
+
+  //   // this.taskOptionsOpen = false;
+  //   this._matDialog.open(EditTaskModalComponent, {
+  //     data: { task: this.task, colId: this.colId, taskIdx: this.taskIdx },
+  //     panelClass: 'sideDialog',
+  //     width: '450px',
+  //     position: { right: '0' },
+  //   });
+  // }
 }
