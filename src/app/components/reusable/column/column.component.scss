@@ -22,10 +22,9 @@
 
   .columnName {
     color: var(--font-secondary);
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     width: 100%;
   }
 

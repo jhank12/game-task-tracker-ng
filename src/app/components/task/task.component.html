@@ -29,10 +29,10 @@
 
   @if(task.date) {
 
-  <div class="completeBy">
+  <div class="dueDate">
     <span class="material-symbols-outlined icon"> calendar_today </span>
 
-    {{ task.date | date }}
+    <p>{{ task.date | date }}</p>
   </div>
   }
 </div>

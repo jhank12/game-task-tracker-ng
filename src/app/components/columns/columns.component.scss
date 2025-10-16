@@ -6,7 +6,7 @@
 .columnsContainer-single {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(335px, 1fr));
 }
 
 .columnsContainer {
@@ -33,9 +33,10 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 550px) {
   .columnsContainer,
   .columnsContainer-single {
     grid-template-columns: 1fr;
+    // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }

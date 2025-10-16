@@ -10,6 +10,8 @@
   --bg-secondary: #1f1f1f;
   --bg-secondary-hover: #292929;
   --bg-lighter: #262626;
+  --bg-lighter: #242424;
+
   --border: #393939;
 
   --border-full: 1px solid var(--border);
@@ -17,16 +19,22 @@
   --bg-radius: 10px;
 
   --font-main: #dedede;
+
   --font-main-hover: #e8e8e8;
 
   --font-secondary: #c9c9c9;
   --font-gray: #949494;
+  --font-dark: #7c7c7c;
+
+  // --font-gray: #7c7c7c;
+
   --font-gray-hover: #a7a7a7;
   --font-red: #ff4d4d;
   --font-green: #64ec42;
 
-  --purple: #7364e5;
-  --purple-hover: #7666ed;
+  --purple: #7747d1;
+
+  --purple-hover: #7e51d1;
 
   --priority-high: #ff4d4d;
   --priority-medium: #ffb342;
@@ -47,7 +55,9 @@ body {
 body {
   background-color: var(--bg-main);
   color: var(--font-main);
-  font-family: "Helvetica", sans-serif !important;
+  // font-family: "Helvetica", sans-serif !important;
+  font-family: "Inter", sans-serif !important;
+
   height: 100vh;
   width: 100vw;
 
@@ -65,6 +75,7 @@ a {
 
 button {
   border: none;
+  cursor: pointer;
   font: inherit;
 }
 
@@ -104,7 +115,7 @@ select {
   cursor: pointer;
   display: flex;
   justify-content: center;
-  padding: 2px;
+  // padding: 2px;
 
   &:hover {
     color: var(--font-gray-hover);
@@ -114,8 +125,8 @@ select {
 .icon {
   background-color: transparent !important;
   color: var(--font-gray);
-  cursor: pointer;
-  padding: 2px;
+  // cursor: pointer;
+  // padding: 2px;
 }
 
 .closeIcon {
@@ -251,7 +262,6 @@ input::placeholder {
       cursor: pointer;
       display: flex;
       justify-content: center;
-      padding: 2px;
 
       &:hover {
         color: var(--font-gray-hover);
@@ -303,11 +313,12 @@ input::placeholder {
 .labelInputContainer {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   font-size: 0.9rem;
 
   label {
     color: var(--font-gray);
+    // font-weight: 500;
   }
 
   input {
