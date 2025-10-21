@@ -32,7 +32,9 @@
   --font-red: #ff4d4d;
   --font-green: #64ec42;
 
-  --purple: #7747d1;
+  --purple: rgb(119, 71, 209);
+  --purple-text: rgb(158, 110, 248);
+  // --purple-text: rgb(154, 100, 255);
 
   --purple-hover: #7e51d1;
 
@@ -62,6 +64,14 @@ body {
   width: 100vw;
 
   overflow-x: hidden;
+}
+
+.siteContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 1fr;
+  max-width: 1500px;
+  width: 100%;
 }
 
 // reset styles

@@ -5,6 +5,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppService } from './app.service';
 
 import { AddColumnDialogComponent } from './components/add-column-dialog/add-column-dialog.component';
@@ -19,6 +21,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [
+    NavbarComponent,
     SidebarComponent,
     ColumnsComponent,
     FormsModule,
@@ -45,7 +48,7 @@ export class AppComponent {
     return this.appService.projectBoards();
   }
 
-  constructor(private _matDialog: MatDialog) {}
+  constructor(private _matDialog: MatDialog) { }
 
   openModal() {
     this._matDialog.open(AddColumnDialogComponent, {

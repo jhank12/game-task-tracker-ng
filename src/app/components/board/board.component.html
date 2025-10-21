@@ -1,5 +1,5 @@
 <app-page-container>
-  <app-navbar />
+  <!-- <app-navbar /> -->
 
   <app-header-justify-between>
     <h1>{{ board.name }}</h1>
@@ -26,7 +26,11 @@
 
   } @else {
 
-  <p>no items</p>
+  <div class="emptyState">
+    <p>You currently don't have any tasks in your project.</p>
+
+    <p>Once you add tasks to your project they will appear here.</p>
+  </div>
 
   }
 </app-page-container>

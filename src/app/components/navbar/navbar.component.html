@@ -1,24 +1,40 @@
-<nav>
-  <p (click)="toggleDropdownExpanded()">
-    Projects
-    <span class="material-symbols-outlined">
-      {{ dropdownExpanded() ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
-    </span>
-  </p>
+<header>
+  <a [routerLink]="'/'">Logo</a>
 
-  @if(dropdownExpanded()) {
-  <ul class="projectLinks">
-    @for(project of projects; track project.id) {
-    <li
-      [routerLink]="['/boards', `${project.id}`]"
-      (click)="setSelectedId(project.id)"
-      class="projectLink"
-    >
-      <span class="material-symbols-outlined"> view_kanban </span>
+  <nav>
+    <div class="dropdown">
+      <p (click)="toggleDropdownExpanded()" class="dropdownBtn">Projects</p>
 
-      {{ project.name }}
-    </li>
-    }
-  </ul>
-  }
-</nav>
+      <ul class="projectLinks">
+        @for(project of projects; track project.id) {
+        <li
+          [routerLink]="['/boards', `${project.id}`]"
+          (click)="setSelectedId(project.id)"
+          class="projectLink"
+        >
+          <span class="material-symbols-outlined"> view_kanban </span>
+
+          {{ project.name }}
+        </li>
+        }
+      </ul>
+    </div>
+    <div class="dropdown">
+      <p (click)="toggleDropdownExpanded()" class="dropdownBtn">Projects</p>
+
+      <ul class="projectLinks">
+        @for(project of projects; track project.id) {
+        <li
+          [routerLink]="['/boards', `${project.id}`]"
+          (click)="setSelectedId(project.id)"
+          class="projectLink"
+        >
+          <span class="material-symbols-outlined"> view_kanban </span>
+
+          {{ project.name }}
+        </li>
+        }
+      </ul>
+    </div>
+  </nav>
+</header>
