@@ -46,10 +46,12 @@
   color: var(--font-gray);
   display: flex;
   gap: 0.5rem;
-  font-size: 0.9rem !important;
+  font-size: 0.85rem !important;
   font-weight: 500;
 
   span {
+    // color: var(--font-dark);
+
     font-size: 1.25rem;
   }
 }

@@ -1,0 +1,24 @@
+<nav>
+  <p (click)="toggleDropdownExpanded()">
+    Projects
+    <span class="material-symbols-outlined">
+      {{ dropdownExpanded() ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
+    </span>
+  </p>
+
+  @if(dropdownExpanded()) {
+  <ul class="projectLinks">
+    @for(project of projects; track project.id) {
+    <li
+      [routerLink]="['/boards', `${project.id}`]"
+      (click)="setSelectedId(project.id)"
+      class="projectLink"
+    >
+      <span class="material-symbols-outlined"> view_kanban </span>
+
+      {{ project.name }}
+    </li>
+    }
+  </ul>
+  }
+</nav>

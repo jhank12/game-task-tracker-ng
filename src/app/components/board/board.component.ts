@@ -6,6 +6,7 @@ import { AppService } from '../../app.service';
 import { HeaderJustifyBetweenComponent } from '../reusable/header-justify-between/header-justify-between.component';
 import { ColumnsComponent } from '../columns/columns.component';
 
+import { NavbarComponent } from '../navbar/navbar.component';
 import { AddColumnDialogComponent } from '../add-column-dialog/add-column-dialog.component';
 import { EditBoardModalComponent } from '../edit-board-modal/edit-board-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +23,7 @@ import { NgClass } from '@angular/common';
     HeaderJustifyBetweenComponent,
     PageContainerComponent,
     ColumnsComponent,
+    NavbarComponent,
     AddColumnDialogComponent,
     EditBoardModalComponent,
     RouterLink,
@@ -36,7 +38,7 @@ export class BoardComponent {
 
   appService = inject(AppService);
 
-  constructor(private _matDialog: MatDialog) {}
+  constructor(private _matDialog: MatDialog) { }
 
   selectedTab = 'Kanban';
 
@@ -65,5 +67,6 @@ export class BoardComponent {
 
   ngOnInit() {
     this.appService.setSelectedId(this.boardId());
+
   }
 }

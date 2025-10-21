@@ -14,7 +14,7 @@ import { ProjectBoard, Column, Task } from './models/models';
 export class AppService {
   constructor() {
     this.loadBoards();
-    // console.log(this.selectedId());
+    console.log("test test test test test");
   }
 
   projectBoards = signal<ProjectBoard[]>([]);
