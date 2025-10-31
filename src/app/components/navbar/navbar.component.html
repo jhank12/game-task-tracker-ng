@@ -19,22 +19,5 @@
         }
       </ul>
     </div>
-    <div class="dropdown">
-      <p (click)="toggleDropdownExpanded()" class="dropdownBtn">Projects</p>
-
-      <ul class="projectLinks">
-        @for(project of projects; track project.id) {
-        <li
-          [routerLink]="['/boards', `${project.id}`]"
-          (click)="setSelectedId(project.id)"
-          class="projectLink"
-        >
-          <span class="material-symbols-outlined"> view_kanban </span>
-
-          {{ project.name }}
-        </li>
-        }
-      </ul>
-    </div>
   </nav>
 </header>

@@ -47,26 +47,7 @@ export class BoardComponent {
   constructor(private _matDialog: MatDialog) {
 
 
-    this.activatedRoute.params.subscribe((res) => {
-      // console.log(res)
-    })
 
-    this.activatedRoute.queryParams.subscribe((res) => {
-      console.log(res['view']);
-
-
-      if (res['view'] !== undefined && res['view'] !== '' && this.isAvailableView(res['view'])) {
-        // this.selectedTab.set(res['view'])
-        this.selectedTab = res['view']
-
-
-      } else {
-        // this.selectedTab.set('Kanban')
-        this.selectedTab = 'kanban'
-
-      }
-
-    })
 
   }
 
@@ -112,6 +93,29 @@ export class BoardComponent {
   }
 
   ngOnInit() {
+
+    this.activatedRoute.queryParams.subscribe((res) => {
+      if (res['view'] !== undefined && res['view'] !== '' && this.isAvailableView(res['view'])) {
+        // this.selectedTab.set(res['view'])
+        this.selectedTab = res['view']
+
+
+      } else {
+        // this.selectedTab.set('Kanban')
+        this.selectedTab = 'kanban'
+
+        this.router.navigate([], {
+          queryParams: {
+            'view': null,
+          },
+          queryParamsHandling: 'merge'
+        });
+      }
+
+
+
+    })
+
     this.appService.setSelectedId(this.boardId());
 
     this.activatedRoute.params.subscribe((params: Params) => {

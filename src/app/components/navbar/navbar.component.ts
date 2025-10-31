@@ -23,7 +23,7 @@ export class NavbarComponent {
   }
 
   setSelectedId(id: string) {
-    this.appService.setSelectedId(id)
+    // this.appService.setSelectedId(id)
     this.toggleDropdownExpanded()
   }
 

@@ -1,18 +1,18 @@
 .boardsContainer {
   display: grid;
   gap: 1rem;
-  // flex-wrap: wrap;
 
-  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
 
-  .boardLink {
+  .boardCard {
     background-color: var(--bg-secondary);
-    border-radius: 5px;
+    border-radius: 8px;
     color: var(--font-secondary);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
     padding: 1rem;
-
-    max-width: 250px;
 
     &:hover {
       background-color: var(--bg-secondary-hover);
@@ -20,19 +20,26 @@
 
     .boardName {
       font-size: 1.15rem;
+      font-weight: 500;
     }
 
     .boardDetails {
-      color: var(--font-gray);
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
 
+      justify-content: space-between;
       margin-top: 1.25rem;
 
       div {
         align-items: center;
+        color: var(--font-gray);
         display: flex;
+        gap: 0.4rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+
+        span {
+          font-size: 1.4rem;
+        }
       }
     }
   }

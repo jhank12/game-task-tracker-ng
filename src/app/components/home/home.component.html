@@ -9,22 +9,27 @@
     @for(board of boards; track board.id) {
 
     <div
-      class="boardLink"
+      class="boardCard"
       [routerLink]="['/boards', `${board.id}`]"
       (click)="this.appService.setSelectedId(board.id)"
     >
       <p class="boardName">{{ board.name }}</p>
 
       <div class="boardDetails">
-        <div>
-          <p>Date Created: {{ board.date | date : "shortDate" }}</p>
-        </div>
-
         @if(board.columnsArr) {
         <div>
-          <p>Tasks: {{ tasksCount(board.columnsArr) }}</p>
+          <span class="material-symbols-outlined icon"> assignment </span>
+
+          <p>
+            {{ tasksCount(board.columnsArr) }}
+          </p>
         </div>
         }
+
+        <div>
+          <span class="material-symbols-outlined icon"> calendar_today </span>
+          <p>{{ board.date | date }}</p>
+        </div>
       </div>
     </div>
 
