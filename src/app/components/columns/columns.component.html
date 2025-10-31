@@ -1,5 +1,5 @@
 <section class="columns">
-  @if(columns !== undefined) { @if(selectedTab === 'Kanban') {
+  @if(columns !== undefined) { @if(selectedTab === 'kanban') {
   <section
     [ngClass]="
       columns.length > 2 ? 'columnsContainer' : 'columnsContainer-single'
@@ -10,7 +10,7 @@
 
     }
   </section>
-  } @if(selectedTab === 'Table') {
+  } @if(selectedTab === 'table') {
 
   <app-columns-table-view [columns]="columns" />
 

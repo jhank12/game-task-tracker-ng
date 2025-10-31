@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 
 import { NgClass } from '@angular/common';
 
@@ -13,9 +13,18 @@ export class BoardTabsComponent {
   @Output() setTab = new EventEmitter<string>();
 
   tabsArr = [
-    { tabName: 'Kanban', icon: 'view_kanban' },
-    { tabName: 'Table', icon: 'table_rows' },
+    { tabName: 'kanban', icon: 'view_kanban' },
+    { tabName: 'table', icon: 'table_rows' },
   ];
+
+  capitalizeFirst(word: String): String {
+    const firstLetter = word[0].toUpperCase();
+
+    const remaining = word.slice(1);
+
+    return firstLetter + remaining
+
+  }
 
   setSelectedTab(tabVal: string) {
     this.setTab.emit(tabVal);

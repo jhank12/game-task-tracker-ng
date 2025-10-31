@@ -13,9 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { BoardTabsComponent } from '../board-tabs/board-tabs.component';
 
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 
 import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-board',
@@ -38,9 +39,47 @@ export class BoardComponent {
 
   appService = inject(AppService);
 
-  constructor(private _matDialog: MatDialog) { }
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
 
-  selectedTab = 'Kanban';
+  selectedTab = 'kanban';
+
+  constructor(private _matDialog: MatDialog) {
+
+
+    this.activatedRoute.params.subscribe((res) => {
+      // console.log(res)
+    })
+
+    this.activatedRoute.queryParams.subscribe((res) => {
+      console.log(res['view']);
+
+
+      if (res['view'] !== undefined && res['view'] !== '' && this.isAvailableView(res['view'])) {
+        // this.selectedTab.set(res['view'])
+        this.selectedTab = res['view']
+
+
+      } else {
+        // this.selectedTab.set('Kanban')
+        this.selectedTab = 'kanban'
+
+      }
+
+    })
+
+  }
+
+
+  availableViews = ['kanban', 'table'];
+
+  isAvailableView(param: string): Boolean {
+
+    if (this.availableViews.indexOf(param) > -1) {
+      return true
+    } else return false
+
+  }
 
   get board() {
     return this.appService.selectedProjectBoard();
@@ -48,6 +87,13 @@ export class BoardComponent {
 
   changeSelectedTab(tab: string) {
     this.selectedTab = tab;
+    this.router.navigate(['/boards/', this.boardId()], {
+
+      queryParams: {
+        view: tab
+      }
+
+    })
   }
 
   openAddColumnModal() {
@@ -68,5 +114,15 @@ export class BoardComponent {
   ngOnInit() {
     this.appService.setSelectedId(this.boardId());
 
+    this.activatedRoute.params.subscribe((params: Params) => {
+
+      const id = params['boardId'];
+
+      this.appService.setSelectedId(id)
+
+    })
+
   }
+
+
 }

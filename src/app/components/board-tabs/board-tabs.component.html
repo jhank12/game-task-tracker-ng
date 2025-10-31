@@ -7,7 +7,7 @@
     (click)="setSelectedTab(tab.tabName)"
   >
     <span class="material-symbols-outlined"> {{ tab.icon }} </span>
-    {{ tab.tabName }}
+    {{ capitalizeFirst(tab.tabName) }}
   </button>
   }
 
