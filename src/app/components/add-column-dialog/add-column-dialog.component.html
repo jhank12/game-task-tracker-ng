@@ -27,7 +27,7 @@
   </app-label-input>
 
   @if(addTasks) {
-  <div class="formTasksSection">
+  <div class="labelInputContainer">
     @if(tasks.length > 0) {
     <p>Tasks</p>
     }
@@ -35,23 +35,28 @@
     <div class="colFormTasks" formArrayName="tasks">
       @for(task of tasks.controls; track $index) {
       <div class="addColumnTask" [formGroup]="getFormGroup($index)">
-        <input type="text" formControlName="taskname" />
-        <select
-          name="prioritySelect"
-          id="prioritySelect"
-          formControlName="priority"
-        >
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
+        <div class="taskDetails">
+          <input type="text" formControlName="taskname" />
 
-        <input
-          type="date"
-          name="targetDate"
-          id="targetDate"
-          formControlName="targetDate"
-        />
+          <div class="priorityDateContainer">
+            <select
+              name="prioritySelect"
+              id="prioritySelect"
+              formControlName="priority"
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+
+            <input
+              type="date"
+              name="targetDate"
+              id="targetDate"
+              formControlName="targetDate"
+            />
+          </div>
+        </div>
 
         <button
           class="removeTaskBtn"

@@ -24,6 +24,8 @@
 
   --font-secondary: #c9c9c9;
   --font-gray: #949494;
+  --font-gray: #7c7c7c;
+
   --font-dark: #7c7c7c;
 
   // --font-gray: #7c7c7c;
@@ -331,10 +333,11 @@ input::placeholder {
     // font-weight: 500;
   }
 
-  input {
+  input,
+  select {
     background-color: var(--bg-secondary) !important;
-    border-radius: 3px !important;
+    border-radius: 5px !important;
     height: 50px !important;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }

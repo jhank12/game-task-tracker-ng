@@ -28,7 +28,7 @@ export class EditBoardModalComponent {
     private _matDialog: MatDialog,
 
     private router: Router
-  ) {}
+  ) { }
 
   appService = inject(AppService);
 
@@ -51,6 +51,7 @@ export class EditBoardModalComponent {
 
   deleteBoard() {
     this.appService.deleteBoard(this.data.id);
+    this.closeModal();
     this.router.navigate(['/']);
   }
 

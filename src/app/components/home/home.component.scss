@@ -11,8 +11,10 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
     padding: 1rem;
+
+    max-width: 460px;
 
     &:hover {
       background-color: var(--bg-secondary-hover);
@@ -31,7 +33,7 @@
 
       div {
         align-items: center;
-        color: var(--font-gray);
+        color: var(--font-dark);
         display: flex;
         gap: 0.4rem;
         font-size: 0.9rem;
@@ -39,6 +41,7 @@
 
         span {
           font-size: 1.4rem;
+          color: var(--font-dark);
         }
       }
     }

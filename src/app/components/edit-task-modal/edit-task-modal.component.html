@@ -5,13 +5,11 @@
 </header>
 
 <div class="taskDetails">
-  <div>
+  <div class="justifybetween">
     <h2>{{ data.task.taskName }}</h2>
     <app-priority-tag
       [taskPriority]="data.task.isComplete ? 'Completed' : data.task.priority"
     />
-
-    <!-- <app-priority-tag [taskPriority]="'Completed'" /> -->
   </div>
 
   @if(data.task.date) {

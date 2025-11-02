@@ -1,18 +1,6 @@
 <div class="task" (click)="openEditTaskModal($event)">
   <div class="justifybetween">
     <div class="taskTextAndIcon">
-      <!-- <button class="actionBtn" (click)="taskToggleComplete($event)">
-        @if(task.isComplete) {
-        <span class="material-symbols-outlined icon completeIcon">
-          check_box
-        </span>
-        } @else {
-        <span class="material-symbols-outlined icon">
-          check_box_outline_blank
-        </span>
-        }
-      </button> -->
-
       <app-toggle-task-complete-button
         [task]="task"
         [colId]="colId"

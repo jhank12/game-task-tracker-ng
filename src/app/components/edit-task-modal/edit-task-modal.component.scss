@@ -3,10 +3,12 @@
   flex-direction: column;
   gap: 1rem;
 
-  div:nth-of-type(1) {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+  .justifybetween {
+    // align-items: center;
+    // display: flex;
+    // justify-content: space-between;
+
+    gap: 0.75rem;
   }
 }
 
@@ -22,10 +24,6 @@
   font-weight: 500;
 }
 
-.editTaskForm label {
-  color: red;
-}
-
 .formButtonsContainer {
   display: flex;
   flex-direction: column;
@@ -37,9 +35,4 @@
   button {
     width: 100%;
   }
-}
-
-.deleteTask {
-  // background-color: var(--priority-high);
-  // background-color: blue;
 }
