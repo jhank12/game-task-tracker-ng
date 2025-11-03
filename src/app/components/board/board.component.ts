@@ -62,13 +62,7 @@ export class BoardComponent {
   }
 
   get board() {
-    if (this.appService.selectedProjectBoard()) {
-      return this.appService.selectedProjectBoard();
-    } else {
-      this.router.navigate(['not-found'])
-
-      return
-    }
+    return this.appService.selectedProjectBoard();
   }
 
   changeSelectedTab(tab: string) {
@@ -98,15 +92,6 @@ export class BoardComponent {
   }
 
   ngOnInit() {
-
-
-    // if (!this.appService.selectedProjectBoard()) {
-    //   this.router.navigate(['not-found'])
-
-    //   // return
-    // }
-
-
     this.activatedRoute.queryParams.subscribe((res) => {
       if (res['view'] !== undefined && res['view'] !== '' && this.isAvailableView(res['view'])) {
         // this.selectedTab.set(res['view'])

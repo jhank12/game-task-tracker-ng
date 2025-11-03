@@ -6,6 +6,8 @@ import { BoardComponent } from './components/board/board.component';
 import { ColumnPageComponent } from './components/column-page/column-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+import { boardGuard } from './board.guard';
+
 export const routes: Routes = [
   {
     path: '',
@@ -18,6 +20,7 @@ export const routes: Routes = [
   {
     path: 'boards/:boardId',
     component: BoardComponent,
+    'canActivate': [boardGuard]
   },
   {
     path: 'boards/:boardId/column/:columnId',
