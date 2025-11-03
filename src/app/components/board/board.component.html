@@ -1,4 +1,5 @@
 <app-page-container>
+  @if(board) {
   <app-header-justify-between>
     <h1>{{ board.name }}</h1>
 
@@ -30,5 +31,7 @@
     <p>Once you add tasks to your project they will appear here.</p>
   </div>
 
+  } } @else {
+  <h1>asdfasdf</h1>
   }
 </app-page-container>

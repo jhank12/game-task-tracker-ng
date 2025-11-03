@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
 import { BoardComponent } from './components/board/board.component';
 import { ColumnPageComponent } from './components/column-page/column-page.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -22,4 +23,8 @@ export const routes: Routes = [
     path: 'boards/:boardId/column/:columnId',
     component: ColumnPageComponent,
   },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];

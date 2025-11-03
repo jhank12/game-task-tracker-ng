@@ -11,6 +11,9 @@ import { AddColumnDialogComponent } from '../add-column-dialog/add-column-dialog
 import { EditBoardModalComponent } from '../edit-board-modal/edit-board-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 
+
+import { NotFoundComponent } from '../not-found/not-found.component';
+
 import { BoardTabsComponent } from '../board-tabs/board-tabs.component';
 
 import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
@@ -30,6 +33,7 @@ import { NgClass } from '@angular/common';
     RouterLink,
     NgClass,
     BoardTabsComponent,
+    NotFoundComponent
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -45,12 +49,7 @@ export class BoardComponent {
   selectedTab = 'kanban';
 
   constructor(private _matDialog: MatDialog) {
-
-
-
-
   }
-
 
   availableViews = ['kanban', 'table'];
 
@@ -63,7 +62,13 @@ export class BoardComponent {
   }
 
   get board() {
-    return this.appService.selectedProjectBoard();
+    if (this.appService.selectedProjectBoard()) {
+      return this.appService.selectedProjectBoard();
+    } else {
+      this.router.navigate(['not-found'])
+
+      return
+    }
   }
 
   changeSelectedTab(tab: string) {
@@ -94,6 +99,14 @@ export class BoardComponent {
 
   ngOnInit() {
 
+
+    // if (!this.appService.selectedProjectBoard()) {
+    //   this.router.navigate(['not-found'])
+
+    //   // return
+    // }
+
+
     this.activatedRoute.queryParams.subscribe((res) => {
       if (res['view'] !== undefined && res['view'] !== '' && this.isAvailableView(res['view'])) {
         // this.selectedTab.set(res['view'])
@@ -111,8 +124,6 @@ export class BoardComponent {
           queryParamsHandling: 'merge'
         });
       }
-
-
 
     })
 
