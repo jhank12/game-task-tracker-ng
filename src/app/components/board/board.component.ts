@@ -20,6 +20,9 @@ import { RouterLink, ActivatedRoute, Router, Params } from '@angular/router';
 
 import { NgClass } from '@angular/common';
 
+import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
+
 
 @Component({
   selector: 'app-board',
@@ -33,7 +36,10 @@ import { NgClass } from '@angular/common';
     RouterLink,
     NgClass,
     BoardTabsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CdkDrag,
+    CdkDropList,
+    CdkDropListGroup
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',

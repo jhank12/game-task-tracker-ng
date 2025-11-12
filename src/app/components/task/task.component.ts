@@ -37,7 +37,7 @@ export class TaskComponent {
 
   appService = inject(AppService);
 
-  constructor(private _matDialog: MatDialog) {}
+  constructor(private _matDialog: MatDialog) { }
 
   taskOptionsOpen: boolean = false;
 
@@ -79,5 +79,6 @@ export class TaskComponent {
 
   ngOnInit() {
     // this.openEditTaskModal();
+    console.log(this.task)
   }
 }

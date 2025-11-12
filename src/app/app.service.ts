@@ -2,6 +2,8 @@ import { Injectable, signal, computed } from '@angular/core';
 
 import { Immer, produce, WritableDraft } from 'immer';
 
+import { BehaviorSubject, pipe, first, Observable } from 'rxjs';
+
 import { v4 as uuid } from 'uuid';
 
 // interfaces
@@ -12,6 +14,13 @@ import { ProjectBoard, Column, Task } from './models/models';
   providedIn: 'root',
 })
 export class AppService {
+
+  private _isLoaded = new BehaviorSubject<boolean | null>(null);
+
+  get isLoaded$(): Observable<boolean | null> {
+    return this._isLoaded.asObservable()
+  }
+
   constructor() {
     this.loadBoards();
   }
@@ -23,7 +32,15 @@ export class AppService {
 
     if (data) {
       this.projectBoards.set(JSON.parse(data));
+
+      this._isLoaded.next(true);
     }
+  }
+
+  checkDataLoaded(): Observable<boolean | null> {
+    return this.isLoaded$.pipe(
+      first(value => value !== null)
+    )
   }
 
   clearStorage() {
@@ -40,7 +57,7 @@ export class AppService {
 
   deleteColumn(colId: string) {
     const updatedBoards = produce(this.projectBoards(), (draft) => {
-      const board = this.immerGetBoard(draft);
+      const board = this.immerGetBoard(draft, this.selectedId());
 
       const filteredColumns: Column[] = board.columnsArr?.filter((col) => {
         return col.id !== colId;
@@ -53,9 +70,9 @@ export class AppService {
     this.projectBoards.set(updatedBoards);
   }
 
-  immerGetBoard(draft: WritableDraft<ProjectBoard>[]) {
+  immerGetBoard(draft: WritableDraft<ProjectBoard>[], boardId: string) {
     const boardIdx: number = draft.findIndex(
-      (board) => board.id === this.selectedId()
+      (board) => board.id === boardId
     );
 
     const currentBoard: ProjectBoard = draft[boardIdx];
@@ -65,7 +82,7 @@ export class AppService {
 
   clearColumns() {
     const updated = produce(this.projectBoards(), (draft) => {
-      const board = this.immerGetBoard(draft);
+      const board = this.immerGetBoard(draft, this.selectedId());
 
       board.columnsArr = [];
     });
@@ -110,6 +127,7 @@ export class AppService {
 
     localStorage.setItem('projects', JSON.stringify(filteredBoards));
     this.projectBoards.set(filteredBoards);
+    this.loadBoards()
   }
 
   // returns copy of board
@@ -128,29 +146,11 @@ export class AppService {
 
       board.columnsArr?.push(newColumn);
 
-      // draft.columnsArr?.push(newColumn);
     });
 
     localStorage.setItem('projects', JSON.stringify(updated));
     this.projectBoards.set(updated);
 
-    // const prevCols: Column[] | undefined =
-    //   this.selectedProjectBoard().columnsArr;
-
-    // if (prevCols !== undefined && prevCols.length > 0) {
-    //   this.selectedProjectBoard().columnsArr = [...prevCols, newColumn];
-
-    //   localStorage.setItem(
-    //     'projects',
-    //     JSON.stringify([...this.projectBoards()])
-    //   );
-    // } else {
-    //   this.selectedProjectBoard().columnsArr = [newColumn];
-    //   localStorage.setItem(
-    //     'projects',
-    //     JSON.stringify([...this.projectBoards()])
-    //   );
-    // }
   }
 
   editColumn(updatedColumn: Column) {
@@ -173,11 +173,9 @@ export class AppService {
 
   addTask(newTask: Task, colId: string) {
     const updated = produce(this.projectBoards(), (draft) => {
-      const boardIdx: number = draft.findIndex(
-        (board) => board.id == this.selectedId()
-      );
+      const board = this.immerGetBoard(draft, this.selectedId());
 
-      const column: Column = draft[boardIdx].columnsArr?.filter(
+      const column: Column = board.columnsArr?.filter(
         (col: Column) => {
           return colId === col.id;
         }
@@ -197,14 +195,25 @@ export class AppService {
         (board) => board.id == this.selectedId()
       );
 
-      const column: Column = draft[boardIdx].columnsArr?.filter(
+      const board = this.immerGetBoard(draft, this.selectedId());
+
+      const column: Column = board.columnsArr?.filter(
         (col: Column) => {
           return colId === col.id;
         }
       )[0]!;
 
       if (!column.tasks) return;
-      column.tasks[taskIdx] = updatedTask;
+
+      if (updatedTask.colId !== colId) {
+        column.tasks[taskIdx] = updatedTask;
+
+        this.moveTask(colId, updatedTask.colId, updatedTask)
+      } else {
+
+        column.tasks[taskIdx] = updatedTask;
+      }
+
     });
 
     localStorage.setItem('projects', JSON.stringify(updated));
@@ -213,11 +222,8 @@ export class AppService {
 
   deleteTask(colId: string, taskId: string) {
     const updated = produce(this.projectBoards(), (draft) => {
-      // const boardIdx: number = draft.findIndex(
-      //   (board) => board.id == this.selectedId()
-      // );
 
-      const board = this.immerGetBoard(draft);
+      const board = this.immerGetBoard(draft, this.selectedId());
 
       const column: Column = board.columnsArr?.filter((col: Column) => {
         return colId === col.id;
@@ -232,6 +238,41 @@ export class AppService {
 
     localStorage.setItem('projects', JSON.stringify(updated));
     this.projectBoards.set(updated);
+  }
+
+
+  moveTask(colId: string, newColId: string, task: Task) {
+
+    const updated = produce(this.projectBoards(), (draft) => {
+
+      const board = this.immerGetBoard(draft, this.selectedId());
+
+      const currentColumn: Column = board.columnsArr?.filter((col: Column) => {
+        return colId === col.id;
+      })[0]!;
+
+      const filteredTasks: Task[] = currentColumn.tasks?.filter((task) => {
+        return task.id !== task.id;
+      })!;
+
+      currentColumn.tasks = filteredTasks;
+
+      const newColumn: Column = board.columnsArr?.filter((col: Column) => {
+        return newColId === col.id;
+      })[0]!;
+
+      // const updatedTask: Task = { ...task, colId: newColId }
+
+      // task in param is already updated task
+      newColumn.tasks?.push(task)
+
+
+    });
+
+    localStorage.setItem('projects', JSON.stringify(updated));
+    this.projectBoards.set(updated);
+
+
   }
 
   setSelectedId(boardId: string) {

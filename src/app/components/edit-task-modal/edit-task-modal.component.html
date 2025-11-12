@@ -65,6 +65,18 @@
     />
   </div>
 
+  <div class="labelInputContainer">
+    <label for="moveTo">Move to</label>
+
+    <select name="moveTo" id="moveTo" formControlName="updatedColumnSelect">
+      @for(col of boardColumns; track col.id) {
+      <option [value]="col.id">
+        {{ col.colName }}
+      </option>
+      }
+    </select>
+  </div>
+
   <div class="formButtonsContainer">
     <button class="mainBtn" [disabled]="!editTaskForm.valid || !hasChanges">
       Update

@@ -11,6 +11,7 @@ import {
   FormControl,
 } from '@angular/forms';
 
+
 import { AppService } from '../../app.service';
 import { ProjectBoard } from '../../models/models';
 
@@ -51,8 +52,8 @@ export class EditBoardModalComponent {
 
   deleteBoard() {
     this.appService.deleteBoard(this.data.id);
+    this.router.navigate(['/'], { replaceUrl: true });
     this.closeModal();
-    this.router.navigate(['/']);
   }
 
   closeModal() {

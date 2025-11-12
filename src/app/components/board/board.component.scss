@@ -1,3 +1,7 @@
+h1 {
+  font-size: 1.75rem;
+}
+
 .boardActions {
   align-items: center;
   display: flex;
@@ -12,8 +16,6 @@
 }
 
 .emptyState {
-  // display: flex;
-  // flex-direction: column;
   position: absolute;
   top: 40%;
   left: 50%;

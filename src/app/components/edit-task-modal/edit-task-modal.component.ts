@@ -54,16 +54,44 @@ export class EditTaskModalComponent {
     private _matDialog: MatDialog,
 
     private fb: FormBuilder
-  ) {}
+  ) {
+
+    console.log(this.data.task)
+  }
 
   editTaskForm!: FormGroup;
+
+  get boardColumns() {
+    return this.appService.selectedProjectBoard().columnsArr
+  }
+
+  get currentTaskColumn() {
+
+    let colData = { id: '', colName: '' };
+
+    this.boardColumns?.forEach(col => {
+      if (col.id == this.data.colId) {
+        colData.id = col.id
+        colData.colName = col.colName
+      }
+    })
+
+    return colData
+  }
+
 
   closeModal() {
     this._matDialog.closeAll();
   }
 
+  moveTask(updatedColId: string) {
+
+    this.appService.moveTask(this.data.task.colId, updatedColId, this.data.task)
+
+  }
+
   submitEditTask() {
-    const { updatedTaskName, updatedPrioritySelect, updatedTargetDate } =
+    const { updatedTaskName, updatedPrioritySelect, updatedTargetDate, updatedColumnSelect } =
       this.editTaskForm.value;
 
     const updatedTask: Task = {
@@ -72,6 +100,7 @@ export class EditTaskModalComponent {
       priority: updatedPrioritySelect,
       date: updatedTargetDate!,
       isComplete: this.data.task.isComplete,
+      colId: updatedColumnSelect
     };
 
     this.appService.editTask(updatedTask, this.data.colId, this.data.taskIdx);
@@ -80,7 +109,7 @@ export class EditTaskModalComponent {
   }
 
   get hasChanges() {
-    const { updatedTaskName, updatedPrioritySelect, updatedTargetDate } =
+    const { updatedTaskName, updatedPrioritySelect, updatedTargetDate, updatedColumnSelect } =
       this.editTaskForm.value;
 
     const newObj: Task = {
@@ -89,6 +118,7 @@ export class EditTaskModalComponent {
       priority: updatedPrioritySelect,
       date: updatedTargetDate,
       isComplete: this.data.task.isComplete,
+      colId: updatedColumnSelect
     };
 
     return JSON.stringify(this.data.task) !== JSON.stringify(newObj);
@@ -110,6 +140,7 @@ export class EditTaskModalComponent {
         Validators.required
       ),
       updatedTargetDate: this.fb.control<Date | null>(this.data.task.date),
+      updatedColumnSelect: this.fb.control<string>(this.data.colId, Validators.required)
     });
   }
 }

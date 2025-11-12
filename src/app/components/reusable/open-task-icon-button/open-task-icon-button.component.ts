@@ -13,11 +13,11 @@ import { AddTaskModalComponent } from '../../add-task-modal/add-task-modal.compo
 export class OpenTaskIconButtonComponent {
   @Input({ required: true }) colId!: string;
 
-  constructor(private _matDialog: MatDialog) {}
+  constructor(private _matDialog: MatDialog) { }
 
   openAddTaskModal() {
     this._matDialog.open(AddTaskModalComponent, {
-      data: this.colId,
+      data: { colId: this.colId },
       panelClass: 'dialogContainer',
     });
   }

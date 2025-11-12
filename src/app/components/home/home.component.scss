@@ -1,8 +1,16 @@
+h1 {
+  font-size: 1.75rem;
+}
+
 .boardsContainer {
   display: grid;
   gap: 1rem;
 
-  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  // grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+
+  // grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+
+  grid-template-columns: repeat(4, 1fr);
 
   .boardCard {
     background-color: var(--bg-secondary);
@@ -21,8 +29,8 @@
     }
 
     .boardName {
-      font-size: 1.15rem;
-      font-weight: 500;
+      font-size: 1.1rem;
+      // font-weight: 500;
     }
 
     .boardDetails {
@@ -45,5 +53,24 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 1180px) {
+  .boardsContainer {
+    // grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .boardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .boardsContainer {
+    grid-template-columns: 1fr;
   }
 }

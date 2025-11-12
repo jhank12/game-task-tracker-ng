@@ -31,9 +31,11 @@ export class AddTaskModalComponent {
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: string,
+    @Inject(MAT_DIALOG_DATA) public data: { colId: string },
     private _matDialog: MatDialog
-  ) {}
+  ) {
+    console.log(data)
+  }
 
   get taskIsInvalid() {
     return (
@@ -57,8 +59,9 @@ export class AddTaskModalComponent {
           priority: priority!,
           date: targetDate!,
           isComplete: false,
+          colId: this.data.colId
         };
-        this.appService.addTask(newTask, this.data);
+        this.appService.addTask(newTask, this.data.colId);
         this.closeModal();
       }
     } else {

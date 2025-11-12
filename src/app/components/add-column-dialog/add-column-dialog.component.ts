@@ -28,7 +28,7 @@ import { LabelInputComponent } from '../reusable/label-input/label-input.compone
 export class AddColumnDialogComponent {
   appService = inject(AppService);
 
-  constructor(private _matDialog: MatDialog) {}
+  constructor(private _matDialog: MatDialog) { }
 
   @Input() dialogRef!: ElementRef<HTMLDialogElement>;
 
@@ -83,6 +83,8 @@ export class AddColumnDialogComponent {
     if (this.newColumnForm.valid) {
       const { columnName, tasks } = this.newColumnForm.value;
 
+      const newColId = uuid();
+
       // add ids to tasks
       const updatedTasks: Task[] | undefined = tasks?.map((task) => {
         const { taskname, priority, targetDate } = task;
@@ -92,13 +94,14 @@ export class AddColumnDialogComponent {
           priority: priority,
           date: targetDate,
           isComplete: false,
+          colId: newColId
         };
         return updatedTask;
       });
 
       if (columnName !== undefined && columnName !== null) {
         const newColumnObj: Column = {
-          id: uuid(),
+          id: newColId,
           colName: columnName,
           tasks: updatedTasks,
         };

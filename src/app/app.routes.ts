@@ -8,6 +8,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { boardGuard } from './board.guard';
 
+import { inject } from '@angular/core';
+import { AppService } from './app.service';
+
 export const routes: Routes = [
   {
     path: '',
@@ -21,6 +24,7 @@ export const routes: Routes = [
     path: 'boards/:boardId',
     component: BoardComponent,
     'canActivate': [boardGuard]
+    // 'canActivate': [() => inject(AppService).selectedProjectBoard()]
   },
   {
     path: 'boards/:boardId/column/:columnId',

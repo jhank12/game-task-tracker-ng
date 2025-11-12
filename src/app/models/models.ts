@@ -2,10 +2,10 @@ export interface Task {
   id: string;
   taskName: string;
   priority: string;
-
   date: Date | null;
-
   isComplete: boolean;
+
+  colId: string;
 }
 
 export interface Column {
